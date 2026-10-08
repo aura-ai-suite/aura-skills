@@ -113,8 +113,9 @@ stays green. The integration style is the one in your policy.
 
 ## 7. Shared files
 
-Files that many tasks want to touch: `CHANGELOG.md`, the task board, shared types, routes, lock
-files. The profile lists yours.
+Files that many tasks want to touch: `CHANGELOG.md`, the task board and history
+(`.aura/board.md`, `.aura/history.md`), shared types, routes, lock files. The profile lists yours.
+On the board, each agent edits only its own section.
 
 - **Two tasks touching the same shared file don't run in parallel**, unless one is the declared
   temporary owner.

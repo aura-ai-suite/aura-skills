@@ -29,8 +29,8 @@ your package scripts. Write this file when you want them to stop guessing.
 ## Tasks and specs
 
 - **Specs:** <docs/specs/<slug>/>       <!-- or: an entry in docs/TASKS.md · or: in the message -->
-- **Task board:** <docs/progress/current.md>   <!-- or: "only the Aura mailbox" -->
-- **History:** <docs/progress/history.md>
+- **Task board:** <.aura/board.md>         <!-- default; or your own, e.g. docs/progress/current.md -->
+- **History:** <.aura/history.md>         <!-- default; or your own, e.g. docs/progress/history.md -->
 - **Claim a task:** <git worktree … (default) or your helper, e.g. bin/agent start <task>>
 
 ## Verification

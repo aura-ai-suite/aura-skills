@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 — 2026-10-08
+
+- **Task board and history.** In team mode — or when work will outlive the session — the lead
+  keeps `.aura/board.md` (active tasks, each with its state, branch, next step and the Builder's
+  handoff) and `.aura/history.md` (closed tasks, newest first, with the Gate's result). They're
+  versioned with your code, so the team's state survives a crash or a new agent. Small requests
+  create nothing. A repo with its own board names it in the profile. Format and who writes what:
+  `aura-lead/references/board.md`.
+- Builders update their own section of the board; resuming after an interruption starts by
+  reading it.
+
 ## 0.2.3 — 2026-10-08
 
 - **Only the five skills are needed.** The README says so up front.

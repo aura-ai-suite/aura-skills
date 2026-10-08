@@ -13,6 +13,7 @@ next one. **You don't merge. You don't make architecture calls. You don't approv
 1. Read the project profile (`.aura/project.md`) if there is one, and **the whole spec.**
 2. With the mailbox: `set_status` → `working`, with the task name in the note. Confirm to the lead
    that you took it (`reply_to` their request).
+   If there is a task board (the profile's, or `.aura/board.md`), set **your** section to `Build`.
 3. **Isolate before you edit the first file** (`aura-git-isolation`): your branch, your worktree.
    Check it, don't assume it:
 
@@ -32,8 +33,9 @@ next one. **You don't merge. You don't make architecture calls. You don't approv
 - **Don't touch shared files another agent holds.** If you need them, ask the lead.
 - **If the spec is wrong or ambiguous, stop and send it back** to the lead with the reason. Don't
   improvise outside the contract.
-- If you'll leave something half done, write the next step on the board or in the mailbox: someone
-  else must be able to pick up where you left off.
+- If you'll leave something half done, write the next step in your section of the board (or in
+  the mailbox if there is no board): someone else must be able to pick up where you left off.
+  Edit only your own section — the board is a shared file.
 
 ## 3. Verify what's yours
 
@@ -56,8 +58,8 @@ run the project's build, lint and tests if they're cheap, and declare the rest a
 4. Sync with the base (rebase), resolve conflicts and run the checks again.
 5. **Push your branch**, if the git policy allows it (in `gate-merges` and `pull-request`, yes; in
    `solo`, only if the user asked). Never to the base or the target branch.
-6. **Handoff**, on the repo's board if it has one **and** through the mailbox with
-   `kind: handoff`:
+6. **Handoff**, in your section of the task board if there is one **and** through the mailbox
+   with `kind: handoff`:
 
 ```markdown
 ### Handoff — <task> · <tool·model> · <date>

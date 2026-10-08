@@ -100,10 +100,12 @@ Tools of the `aura-mailbox` MCP server: `send_message`, `read_inbox`, `list_peer
 
 When a session starts, or when the user says something got cut off:
 
-1. `git worktree list`, and for every worktree with an open task: uncommitted changes? Commits
+1. **Read the task board first**, if there is one (the profile's, or `.aura/board.md`): it says
+   what was in flight and each task's next step.
+2. `git worktree list`, and for every worktree with an open task: uncommitted changes? Commits
    not pushed (`git log @{u}..`, or the branch doesn't exist on the remote)? A handoff written?
-2. **Report the state to the lead or the user before touching anything.**
-3. Never rewrite or revert a branch someone already rescued. Look at the new state and deliver
+3. **Report the state to the lead or the user before touching anything.**
+4. Never rewrite or revert a branch someone already rescued. Look at the new state and deliver
    only what is missing.
 
 ## 5. Authorization

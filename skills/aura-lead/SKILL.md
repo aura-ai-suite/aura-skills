@@ -15,11 +15,13 @@ Extra detail, loaded **only when you need it**:
 | `references/spec.md` | You're about to write a spec |
 | `references/assignment.md` | You're about to split work across agents or models |
 | `references/gate.md` | You're about to verify a delivery |
+| `references/board.md` | Team mode, or work that will outlive the session: the task board and the history |
 | skill `aura-model-roster` | You need to know what each model is good at, costs, and can't do |
 
 ## 1. When you start or resume
 
-1. The project profile (`.aura/project.md`) and the repo's task board, if there is one.
+1. The project profile (`.aura/project.md`) and **the task board** — the repo's own, or
+   `.aura/board.md`. It says what's in flight and where each task stopped.
 2. `git fetch` + `git worktree list`: which branches and worktrees are alive.
 3. With the mailbox: `list_peers` (who is free) and `list_tasks`.
 4. If someone left work half done: the resume procedure in `aura-workflow` §4.
@@ -33,6 +35,9 @@ Extra detail, loaded **only when you need it**:
   files for something that fits in a paragraph.
 - **Resolve ambiguity with the user before assigning.** An incomplete spec comes back to you; it
   doesn't go to a Builder to guess.
+- **In Team mode, keep a board and a history** (`references/board.md`). If the profile names
+  none, create `.aura/board.md` and `.aura/history.md` the first time you assign. Add each task's
+  section when you assign it.
 - **Cut so tasks don't collide:** two tasks that touch the same shared file don't run in
   parallel. Serialize them, or make one of them the declared temporary owner of the file.
 
@@ -83,7 +88,9 @@ Full checklist: `references/gate.md`. Non-negotiable:
    when tests pass, if it sees a problem that will hit users.
 7. If it passes: integrate following the git policy (direct merge or PR) with the evidence in the
    message.
-8. **Record how the model behaved** in the profile's model record: did it isolate, push, write an
+8. **Close it on the board:** move the task's section to the top of the history, with what you
+   ran and the result.
+9. **Record how the model behaved** in the profile's model record: did it isolate, push, write an
    honest handoff, did its green hold? That record beats any benchmark.
 
 ## 6. Stop and ask the user
