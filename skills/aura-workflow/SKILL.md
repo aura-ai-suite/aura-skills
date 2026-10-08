@@ -112,7 +112,8 @@ Act **within the authorization in force**: what the user said, the profile, and 
 `aura-git-isolation`. Ask **only when it's missing**. If the user already allowed pushing or
 merging, don't ask again. If they didn't, anything irreversible or outward-facing (merging into a
 protected branch, deploys, releases, payments, deleting data) **gets asked**. With nothing
-configured, the default is: commit locally, and ask before pushing or merging.
+configured, the defaults in `aura-git-isolation` apply: pushing your own task branch is fine;
+merging into the target branch is asked first.
 
 ## 6. Rules that hold in every repo
 

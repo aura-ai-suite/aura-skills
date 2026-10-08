@@ -85,8 +85,8 @@ the most expensive mistake a Builder can make.
 
 ## 5. If you're about to be cut off
 
-Out of quota, time or context: **say so before.** If you won't make it, commit and push what you
-have, with a partial handoff that says where you stopped. A half-built tree with no warning is
+Out of quota, time or context: **say so before.** If you won't make it, commit what you have —
+and push it, if the git policy allows — with a partial handoff that says where you stopped. A half-built tree with no warning is
 worse than never starting.
 
 ## 6. What you never do

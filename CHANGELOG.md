@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.2 — 2026-10-08
+
+- **Consistent default permissions:** builders push their own task branch; the Gate asks you
+  before merging into the target branch, unless your git policy says "without asking".
+  `aura-workflow`, `aura-builder` and `aura-git-isolation` now say the same thing.
+- **Upgrades just work.** `install.sh` recognizes every released version (`fingerprints.txt`), so
+  installs from 0.1.0, copies made by hand and `npx skills add` installs update without `--force`
+  — as long as you didn't edit them.
+- **Install with `npx skills add aura-ai-suite/aura-skills`** (the [skills](https://skills.sh)
+  CLI, 20+ agents), or with `install.sh` as before.
+- README: a "Your first prompt" section with examples, and where the installed git policy lives.
+- Maintainers: each release appends its fingerprints to `fingerprints.txt`.
+
 ## 0.2.1 — 2026-10-08
 
 - **Fix in `aura-model-roster`:** `deepseek-v4-pro` is still DeepSeek V4-Pro. 0.2.0 said it routes

@@ -24,16 +24,41 @@ providers working in parallel on three repositories. They work **with or without
 
 ## Quick start
 
-You need `git` and at least one of Claude Code, Codex or OpenCode.
+You need `git` and at least one AI coding agent. Pick one way to install:
+
+**With the [skills](https://skills.sh) CLI** — fastest, and works with 20+ agents (Claude Code,
+Codex, OpenCode, Cursor, Copilot, Windsurf, Gemini…):
+
+```bash
+cd your-project
+npx skills add aura-ai-suite/aura-skills
+```
+
+That CLI sends anonymous install counts to skills.sh; set `DISABLE_TELEMETRY=1` to opt out.
+
+**With our installer** — for Claude Code, Codex and OpenCode. It can also create the project
+profile, and it updates the skills you never edited without touching the ones you changed:
 
 ```bash
 git clone https://github.com/aura-ai-suite/aura-skills.git
 cd your-project
-../aura-skills/install.sh
+../aura-skills/install.sh --profile
 ```
 
 That's it: the skills work right away with sensible defaults. Then, when you have five minutes,
 adapt the git policy to your team (below).
+
+### Your first prompt
+
+You don't have to name the skills. Ask as usual; the agent loads them when they apply:
+
+- *"Fix the typo in the login button."* → it does it directly, no process.
+- *"Add password reset by email."* → it states the mode ("Builder + Gate · critical, it touches
+  auth"), writes 3-5 checkable criteria, builds, then reviews against them.
+- *"You're the lead. Split these five tasks between codex-1 and opencode-1 and review what they
+  deliver."* → it writes specs, assigns by model, and gates each branch.
+- *"You're a builder. Take task `password-reset`."* → it isolates in a worktree, builds, and
+  delivers a handoff.
 
 ## What's inside, and what you do with each file
 
@@ -51,9 +76,19 @@ builds spends its context on your code, not on process.
 
 ## Adapt the git policy (once)
 
-Open `aura-git-isolation/SKILL.md` and fill the **"Your git policy"** table at the top. Empty
-values fall back to the defaults: a branch per task from your default branch, the reviewer
-merges, Conventional Commits.
+Open the **installed** copy of `aura-git-isolation/SKILL.md` and fill the **"Your git policy"**
+table at the top. Where it is:
+
+| Installed for | Claude Code | Codex and OpenCode |
+|---|---|---|
+| One project | `.claude/skills/aura-git-isolation/` | `.agents/skills/aura-git-isolation/` |
+| All your projects (`--user`) | `~/.claude/skills/aura-git-isolation/` | `~/.agents/skills/aura-git-isolation/` |
+
+If you use Claude Code and another tool, there are two copies: edit one and copy it over the
+other.
+
+Empty values fall back to the defaults: a branch per task from your default branch, builders push their
+own branches, the reviewer merges after asking you, Conventional Commits.
 
 | If your team uses… | Set |
 |---|---|
@@ -146,7 +181,8 @@ So nobody assumes otherwise:
   assigned until the other agent confirms. The Aura mailbox board shows; it doesn't assign.
 - **They don't enforce permissions.** Protect your branches in your git provider.
 - **They don't know which model sits behind each agent** unless you write it in the profile.
-- **Aura doesn't install them for you yet:** use `install.sh`, or copy them by hand.
+- **Aura doesn't install them for you yet:** use `npx skills add`, `install.sh`, or copy them by
+  hand.
 
 ## License
 

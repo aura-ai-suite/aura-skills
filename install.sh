@@ -65,6 +65,10 @@ if command -v sha256sum >/dev/null 2>&1; then sha() { sha256sum; }; else sha() {
 fingerprint() { (cd "$1" && find . -type f ! -name .aura-installed | LC_ALL=C sort | while IFS= read -r f; do
   printf '%s %s\n' "$f" "$(sha < "$f" | cut -c1-64)"; done | sha | cut -c1-64); }
 MARK=.aura-installed
+# Fingerprints of every released version (fingerprints.txt: "<skill> <fingerprint>"). A skill that
+# matches one of them was never edited — even if it was installed by hand, by `npx skills add`,
+# or by a version of this script that didn't leave a marker.
+released() { grep -qx "$1 $2" "$SRC/fingerprints.txt" 2>/dev/null; }
 
 changed=0 skipped=0 seen=" "
 for t in "${tools[@]}"; do
@@ -77,9 +81,11 @@ for t in "${tools[@]}"; do
     if [ -d "$dst/$s" ]; then
       cur="$(fingerprint "$dst/$s")"
       if [ "$cur" = "$new" ]; then
-        echo "  = $s (up to date)"; continue
+        echo "  = $s (up to date)"
+        [ "$dry" = 1 ] || [ -f "$dst/$s/$MARK" ] || echo "$new" > "$dst/$s/$MARK"
+        continue
       fi
-      if [ "$(cat "$dst/$s/$MARK" 2>/dev/null)" = "$cur" ]; then
+      if [ "$(cat "$dst/$s/$MARK" 2>/dev/null)" = "$cur" ] || released "$s" "$cur"; then
         run rm -rf "$dst/$s"
         echo "  ↑ $s updated (you hadn't edited it)"
       elif [ "$force" != 1 ]; then

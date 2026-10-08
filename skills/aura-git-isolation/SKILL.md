@@ -21,7 +21,7 @@ description: How several AI coding agents work in the same git repository withou
 | **Task branch name** | `feature/<task>` (`fix/<task>` for bugs) | |
 | **Commit convention** | [Conventional Commits](https://www.conventionalcommits.org/), in English | |
 | **Who may push task branches** | Builders, without asking | |
-| **Who may merge to the target** | The Gate, after verifying | |
+| **Who may merge to the target** | The Gate, after verifying — **and it asks the user first**. Write "without asking" here to skip that | |
 | **Always ask first** | Force-push, deleting branches, merging to a release or production branch | |
 
 **An empty "Your value" means the default applies.** Out of the box, this works as-is.

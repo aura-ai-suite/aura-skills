@@ -25,16 +25,42 @@ proveedores trabajando en paralelo sobre tres repositorios. Funcionan **con o si
 
 ## Empezar
 
-Necesitás `git` y al menos una de estas herramientas: Claude Code, Codex u OpenCode.
+Necesitás `git` y al menos un agente de IA de programación. Elegí una forma de instalar:
+
+**Con el CLI de [skills](https://skills.sh)**: la más rápida, y funciona con más de 20 agentes
+(Claude Code, Codex, OpenCode, Cursor, Copilot, Windsurf, Gemini…):
+
+```bash
+cd tu-proyecto
+npx skills add aura-ai-suite/aura-skills
+```
+
+Ese CLI le manda a skills.sh conteos anónimos de instalación. Para desactivarlo, usá
+`DISABLE_TELEMETRY=1`.
+
+**Con nuestro instalador**: para Claude Code, Codex y OpenCode. Además puede crear el perfil del
+proyecto, y actualiza las skills que nunca editaste sin tocar las que cambiaste:
 
 ```bash
 git clone https://github.com/aura-ai-suite/aura-skills.git
 cd tu-proyecto
-../aura-skills/install.sh
+../aura-skills/install.sh --profile
 ```
 
 Listo: las skills funcionan desde ya, con valores por defecto razonables. Cuando tengas cinco
 minutos, adaptá la política de git a tu equipo (más abajo).
+
+### Tu primer prompt
+
+No hace falta nombrar las skills. Pedí como siempre: el agente las carga cuando aplican.
+
+- *«Arreglá el typo del botón de login.»* → lo hace directo, sin proceso.
+- *«Agregá recuperar la contraseña por email.»* → anuncia el modo («Builder + Gate · crítica, toca
+  auth»), escribe 3 a 5 criterios verificables, construye y después revisa contra ellos.
+- *«Sos el líder. Repartí estas cinco tareas entre codex-1 y opencode-1 y revisá lo que
+  entreguen.»* → escribe specs, reparte según el modelo y hace el Gate de cada rama.
+- *«Sos constructor. Tomá la tarea `password-reset`.»* → se aísla en un worktree, construye y
+  entrega un handoff.
 
 ## Qué trae, y qué hacés con cada archivo
 
@@ -52,9 +78,18 @@ barato que solo construye gasta su contexto en tu código, no en el proceso.
 
 ## Adaptá la política de git (una vez)
 
-Abrí `aura-git-isolation/SKILL.md` y completá la tabla **"Your git policy"** de arriba. Lo que
-dejes vacío usa el valor por defecto: una rama por tarea desde tu rama principal, el revisor
-integra, Conventional Commits.
+Abrí la copia **instalada** de `aura-git-isolation/SKILL.md` y completá la tabla **"Your git
+policy"** de arriba. Dónde está:
+
+| Instalada para | Claude Code | Codex y OpenCode |
+|---|---|---|
+| Un proyecto | `.claude/skills/aura-git-isolation/` | `.agents/skills/aura-git-isolation/` |
+| Todos tus proyectos (`--user`) | `~/.claude/skills/aura-git-isolation/` | `~/.agents/skills/aura-git-isolation/` |
+
+Si usás Claude Code y otra herramienta, hay dos copias: editá una y copiala sobre la otra.
+
+Lo que dejes vacío usa el valor por defecto: una rama por tarea desde tu rama principal, cada constructor
+pushea su propia rama, el revisor integra después de preguntarte, Conventional Commits.
 
 | Si tu equipo usa… | Poné |
 |---|---|
@@ -148,7 +183,8 @@ Para que nadie lo suponga:
   asignado hasta que el otro agente confirma. El tablero del buzón de Aura muestra, no asigna.
 - **No hacen cumplir permisos.** Protegé tus ramas en tu proveedor de git.
 - **No saben qué modelo hay detrás de cada agente** si no lo escribís en el perfil.
-- **Aura todavía no las instala por vos:** usá `install.sh`, o copialas a mano.
+- **Aura todavía no las instala por vos:** usá `npx skills add`, `install.sh`, o copialas a
+  mano.
 
 ## Licencia
 
