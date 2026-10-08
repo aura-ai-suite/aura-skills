@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/cover.jpg" alt="Aura Skills — skills for Claude Code, Codex and OpenCode: multi-agent development with adaptive workflows, git isolation and code review" width="100%"></p>
+
 # Aura Skills
 
 *[Leer en español](README.es.md)*

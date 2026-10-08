@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/cover.jpg" alt="Aura Skills — skills para Claude Code, Codex y OpenCode: desarrollo multiagente con flujos adaptativos, aislamiento en git y revisión de código" width="100%"></p>
+
 # Aura Skills
 
 *[Read in English](README.md)* · La versión principal es la inglesa. Las skills están en inglés:
