@@ -13,8 +13,11 @@ git log --oneline <base>..origin/<branch>     # are there commits on the remote?
 - Does the branch exist **on the remote**? In a team, a commit that only lives on the Builder's
   disk doesn't exist. (Working solo without push permission, review the local branch at the
   commit named in the handoff.)
-- Is there a handoff? With the mailbox, did it arrive as `kind: handoff`?
-- Does the commit in the handoff match the remote?
+- Is there a handoff — **inside the branch**, in the Builder's section of the board (if there is
+  one)? With the mailbox, did it also arrive as `kind: handoff`?
+- Does the remote branch contain the commit named in the handoff
+  (`git merge-base --is-ancestor <sha> origin/<branch>`)? The handoff itself may sit in a later
+  commit — that's expected.
 
 If something is missing, ask for it. Don't go digging on someone else's disk.
 

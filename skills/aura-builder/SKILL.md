@@ -70,13 +70,25 @@ run the project's build, lint and tests if they're cheap, and declare the rest a
 - **Checks:** <command → result with a number>
 - **Files:** <list>
 - **Deviations from the spec:** <or "none">
-- **Branch:** <branch> @ <short sha> · pushed to <remote> (or "local only") · not merged
+- **Branch:** <branch> @ <short sha of your last code commit> · pushed to <remote> (or "local only") · not merged
 - **Worktree:** <path>
 - **Open criteria:** <the spec's criteria you didn't close>
 - **To check visually:** <URL and port · test user · data · steps · what should appear>
 ```
 
-7. `set_status` → `idle`. You can take another task while the Gate reviews.
+7. **Prove the delivery before you say "done"** — run it, don't assume it:
+
+   ```bash
+   git status --short                              # empty: nothing left uncommitted
+   git ls-remote --heads origin <branch>           # its sha must equal…
+   git rev-parse HEAD                              # …your HEAD
+   git show HEAD:<board file> | grep -n "Handoff — <task>"   # the handoff is in the commit
+   ```
+
+   Any of them fails → you haven't delivered yet; fix it first. (No board? The last check is the
+   handoff message you sent. Solo without push? Skip the `ls-remote`.) If the profile names a
+   helper that checks this for you (e.g. `bin/agente done`), run it too.
+8. `set_status` → `idle`. You can take another task while the Gate reviews.
 
 **In a team, no push means no delivery**, even if the code is written and the tests pass: the Gate
 verifies a branch on the remote, not your disk. (Working solo without push permission, the delivery

@@ -62,6 +62,17 @@ Closed tasks, newest first. Append only: never edit an old entry.
 | Gate passes or drops it | Lead | Moves the section to the top of the history, with the Gate result |
 | Resuming after an interruption | Anyone | Reads the board **first** |
 
+## Which branch each edit goes in
+
+| Edit | Branch |
+|---|---|
+| Lead adds a task's section, or fixes the board | The **base branch**, committed and pushed right away, so every new worktree starts with it |
+| Builder updates its own section and writes its handoff | **Its own task branch**, committed with its work — it reaches the base when the Gate merges |
+| Gate moves the section to the history | The **base branch**, in the merge commit or right after it |
+
+So a Builder never commits to the base branch, and the Gate sees the handoff inside the branch it
+is reviewing. Different tasks touch different sections, so these merges stay trivial.
+
 ## Rules
 
 - **These are shared files.** Two agents never edit the same section. Pull (or rebase) before

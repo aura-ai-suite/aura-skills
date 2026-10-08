@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1 — 2026-10-08
+
+- **Which branch each board edit goes in.** The lead edits the board on the base branch; a Builder
+  writes its section and handoff inside its own task branch, so the Gate reviews the handoff
+  together with the code; the Gate moves it to the history on the base branch.
+- **Builders prove the delivery before saying "done":** nothing uncommitted, the remote branch at
+  their HEAD, the handoff in the commit. The skills can't enforce it on their own — if your repo
+  has a helper that does (like a `done` command), name it in the profile.
+
 ## 0.3.0 — 2026-10-08
 
 - **Task board and history.** In team mode — or when work will outlive the session — the lead

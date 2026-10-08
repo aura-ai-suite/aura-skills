@@ -1,5 +1,6 @@
 # Fingerprints of every released skill, used by install.sh to tell "never edited" from "edited".
 # Maintainers: on each release, append the new lines (see CHANGELOG). Format: <skill> <sha256>
+aura-builder 4be98ade258f320434b2e9314cd8fc2b9030ca27a2c5938871f9fbe2166dd539
 aura-builder 808a9c0ca2929b0eb68dc0e2755ffb9802c7c5dcddd9f2f7e280903b1ca6e782
 aura-builder af506d06611afe921c0cc4438558d7e1cca75f7c8a1adc39156674d741df5162
 aura-builder e4ad4c3545d3a679938bb0875302d7aff7461498e0e2d78005a8a16813380e8e
@@ -9,6 +10,7 @@ aura-git-isolation 9913b46f3e59f9a9e2f66fd1a6057836d43926c8a63d35aa0494c435fd980
 aura-git-isolation fb0fadfbac5871569ca97613c652c63c4aa3fe40b79d45a0c6cd0d3faa142bc6
 aura-git-isolation feeb262411ff79c5c71194acf5caf0971abb1357b78fe8d00da570820f84891d
 aura-lead 7442eafb90554ae06dc2a3e4cf9cf7be529360b34b59e224ba50ff1386907763
+aura-lead 7c7db57cf5e1fa201dfb9f244928d722d0433c957edc3a8f1f34cfd61c44050a
 aura-lead a4e418e362ef9fc25403ff7fc0584d082dac1eb70bce31f3ef6c46c41c335cd2
 aura-lead d2efd7e239d176f59f89f476ad4175fc0d2273954ec46c4b860068c2a6c4b4fe
 aura-model-roster 077d8be5b84bba572bbc0bede18d24a331f626cb3e07dbcafe59d3b0f819107e
