@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.1 — 2026-10-08
+
+- **Fix in `aura-model-roster`:** `deepseek-v4-pro` is still DeepSeek V4-Pro. 0.2.0 said it routes
+  to V4.1-Flash; DeepSeek reversed that plan on 2026-09-10. What was retired is V4-Flash, and the
+  current id for V4.1-Flash is `deepseek-flash`.
+- **Every vendor number in the roster now links to the vendor's own page** (§5). Figures without
+  an official source were removed: the reference-model table, subscription quotas, and privacy
+  claims (now "unverified" for every model).
+
 ## 0.2.0 — 2026-10-08
 
 - **Everything is in English now.** A Spanish README is kept in `README.es.md`.

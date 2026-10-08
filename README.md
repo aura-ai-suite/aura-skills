@@ -77,8 +77,8 @@ before assigning work and offers to refresh it. To refresh:
 
 - **Get ours:** `git pull` in `aura-skills`, then run `install.sh` again. Skills you never edited
   update themselves; the installer keeps a fingerprint of what it installed and can tell.
-- **Do it yourself:** ask your lead agent to refresh it. §6 of the roster lists where each number
-  comes from.
+- **Do it yourself:** ask your lead agent to refresh it. Every number in the roster links to the
+  vendor's own page, and §6 explains how to refresh it.
 
 How models behaved **on your project** goes in the record of `.aura/project.md`, not in the roster.
 That record outranks any benchmark, and updating the roster never erases it.

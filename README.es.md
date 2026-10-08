@@ -79,8 +79,8 @@ antes de repartir trabajo y te ofrece actualizarlo. Para actualizarlo:
 - **Recibí el nuestro:** `git pull` en `aura-skills` y volvé a correr `install.sh`. Las skills que
   nunca editaste se actualizan solas: el instalador guarda una huella de lo que instaló y se da
   cuenta.
-- **Hacelo vos:** pedile a tu agente líder que lo actualice. La §6 del catálogo dice de dónde sale
-  cada dato.
+- **Hacelo vos:** pedile a tu agente líder que lo actualice. Cada número del catálogo enlaza a la
+  página del proveedor, y la §6 explica cómo actualizarlo.
 
 Cómo se portaron los modelos **en tu proyecto** va en el registro de `.aura/project.md`, no en el
 catálogo. Ese registro pesa más que cualquier benchmark, y actualizar el catálogo nunca lo borra.
