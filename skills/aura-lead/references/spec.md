@@ -1,48 +1,49 @@
-# Cómo escribir una spec
+# Writing a spec
 
-La spec existe para que nadie construya lo equivocado. **Si no reduce riesgo, no la escribas.**
+A spec exists so nobody builds the wrong thing. **If it doesn't reduce risk, don't write it.**
 
-## Dónde va
+## Where it goes
 
-La que diga el perfil (`.aura/project.md` → `specs:`). Por ejemplo:
+Wherever the profile says (`.aura/project.md` → Specs). For example:
 
-- una carpeta `docs/specs/<slug>/` con `requirements.md` y `tasks.md`;
-- una entrada en un tablero versionado (`docs/TAREAS.md`): la entrada **es** la spec;
-- en modo Builder + Gate, el propio mensaje de pedido.
+- a folder `docs/specs/<slug>/` with `requirements.md` and `tasks.md`;
+- an entry in a versioned task board (`docs/TASKS.md`): the entry **is** the spec;
+- in Builder + Gate mode, the request message itself.
 
-La skill no te impone el archivo; **te impone el contenido**.
+No profile? Use the message for small tasks and `docs/specs/<slug>/` for team work.
+This skill doesn't impose the file. **It imposes the content.**
 
-## Plantilla
+## Template
 
 ```markdown
-## <slug> — <título corto>
+## <slug> — <short title>
 
-**Objetivo:** <una frase. Qué cambia para el usuario.>
+**Goal:** <one sentence. What changes for the user.>
 
-**Criterios de aceptación** (cada uno se puede correr o ver):
-- [ ] `npm test -- login.test.ts` pasa, incluido el caso nuevo "token vencido → 401"
-- [ ] En 390×844 el botón no se corta (captura en el handoff)
+**Acceptance criteria** (each one can be run or seen):
+- [ ] `npm test -- login.test.ts` passes, including the new case "expired token → 401"
+- [ ] At 390×844 the button isn't clipped (screenshot in the handoff)
 
-**Área:** src/auth/, tests/auth/
-**Archivos imán:** src/lib/api.ts (lo tiene <otra tarea>, coordinar)
-**Fuera de alcance:** <lo que alguien podría creer que entra y no entra>
-**Depende de:** <otra spec o "nada">
-**Requiere navegador:** sí / no
-**Verificación:** normal / elevada / crítica
-**Leer antes:** <docs o archivos que el Builder necesita>
-**Preguntas abiertas:** <o "ninguna">
+**Area:** src/auth/, tests/auth/
+**Shared files:** src/lib/api.ts (held by <other task> — coordinate)
+**Out of scope:** <what someone might think is included and isn't>
+**Depends on:** <another spec, or "nothing">
+**Needs a browser:** yes / no
+**Verification:** normal / elevated / critical
+**Read first:** <docs or files the Builder needs>
+**Open questions:** <or "none">
 ```
 
-## Reglas
+## Rules
 
-- **Criterios que se corren, no aspiraciones.** «Que funcione bien» no es un criterio. «El test
-  X pasa» sí. «Que se vea bien» no. «En 1440×900 y 390×844, sin scroll horizontal», sí.
-- **Una spec mediana entra en una página.** Si no entra, son dos tareas.
-- **Sin secciones de relleno.** Si un campo no aplica, sacalo.
-- **El dial:** para un modelo menos capaz, escribí la API: `archivo:línea`, firmas, payload y
-  cero decisiones abiertas. Para uno más capaz, alcanza con el contrato y un patrón de referencia
-  existente.
-- **Lo que cambió después de escribirla** (otra rama se mergeó, un archivo se movió) va en el
-  prompt de arranque como «delta», con archivo y línea, o actualizás la spec.
-- **Las decisiones de arquitectura** que compararon alternativas van en un `design.md` aparte,
-  **solo si existen**.
+- **Criteria you can run, not wishes.** "Works well" is not a criterion. "Test X passes" is.
+  "Looks good" is not. "At 1440×900 and 390×844, no horizontal scroll" is.
+- **A medium spec fits on one page.** If it doesn't, it's two tasks.
+- **No filler sections.** If a field doesn't apply, drop it.
+- **The dial:** for a less capable model, write out the API — `file:line`, signatures, payloads,
+  zero open decisions. For a more capable one, the contract plus an existing reference pattern is
+  enough. Which model is which: `aura-model-roster`.
+- **What changed after you wrote it** (another branch merged, a file moved) goes into the kickoff
+  prompt as the "delta", with file and line — or you update the spec.
+- **Architecture decisions** that compared alternatives go in a separate `design.md`, **only if
+  there are any.**

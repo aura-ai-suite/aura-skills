@@ -1,123 +1,153 @@
 # Aura Skills
 
-Skills para trabajar con uno o varios agentes de IA de programación —Claude Code, Codex,
-OpenCode— **sin sobreingeniería**: el proceso se adapta a cada pedido. Un typo se arregla
-directo. Una feature lleva criterios y una revisión. Un trabajo grande se reparte entre agentes,
-cada uno en su rama, y alguien distinto verifica antes de integrar.
+*[Leer en español](README.es.md)*
 
-Salen de cómo trabajamos de verdad en [Aura](https://aura-ai.dev), con seis agentes de tres
-proveedores en paralelo sobre tres repositorios. Funcionan **con o sin** Aura Desktop. Con Aura,
-los agentes además se hablan por el buzón (`aura-mailbox`).
+**Teach your AI coding agents to work as a team — without turning every request into a
+project.**
 
-> **La metodología se adapta al trabajo. Nunca el trabajo a la metodología.**
+Aura Skills are instruction files that AI coding agents (Claude Code, Codex, OpenCode) load on
+their own when a task calls for them. With them installed, your agents:
 
-## Las cuatro skills
+- **size each request before acting.** A typo gets fixed directly. A feature gets a few checkable
+  criteria and a review. A big job gets split across agents.
+- **don't step on each other.** Each task gets its own branch and its own folder (a git worktree).
+- **hand over honestly.** Every delivery says what was done, with real test counts, and what was
+  **not** verified.
+- **get a second pair of eyes.** Someone other than the builder checks the work before it's
+  merged, and can send it back even when the tests pass.
+- **assign work by what each model is actually good at**, using a dated catalog of models.
 
-| Skill | Quién la carga | Qué hace |
-|---|---|---|
-| [`aura-workflow`](skills/aura-workflow/SKILL.md) | Todos, siempre | Clasifica cada pedido en dos ejes —cuánto proceso (directo · Builder + Gate · equipo) y cuánta verificación (normal · elevada · crítica)— y elige el modo más liviano que alcanza. Cómo usar el buzón de Aura. Cómo retomar después de un corte. |
-| [`aura-lead`](skills/aura-lead/SKILL.md) | Quien reparte y revisa | Del pedido a specs verificables, reparto por capacidades (no por marcas), y el **Gate**: verificar cada entrega y poder rechazarla aunque los tests pasen. Carga bajo demanda sus guías de [spec](skills/aura-lead/references/spec.md), [reparto](skills/aura-lead/references/assignment.md) y [Gate](skills/aura-lead/references/gate.md). |
-| [`aura-builder`](skills/aura-builder/SKILL.md) | Quien construye | Una tarea, aislada en su worktree, verificada con números y entregada con un **handoff honesto** que dice lo que *no* se verificó. Nunca mergea. |
-| [`aura-git-isolation`](skills/aura-git-isolation/SKILL.md) | Quien toca git | Una tarea = una rama = un worktree. Staging quirúrgico, commit → sincronizar → push, commits firmados por agente. Respeta la rama y la política de integración de **tu** proyecto. |
+They come from how the [Aura](https://aura-ai.dev) team builds Aura itself: six agents from three
+providers working in parallel on three repositories. They work **with or without** Aura.
 
-Están **cortadas por rol, no por fase**: el Builder no carga las reglas del Gate. Así un modelo
-económico que solo construye gasta su contexto en la tarea, no en el proceso.
+> **The process adapts to the work. Never the work to the process.**
 
-## Instalar
+## Quick start
+
+You need `git` and at least one of Claude Code, Codex or OpenCode.
 
 ```bash
 git clone https://github.com/aura-ai-suite/aura-skills.git
-cd tu-proyecto
-../aura-skills/install.sh --profile
+cd your-project
+../aura-skills/install.sh
 ```
 
-Eso instala las cuatro skills en las carpetas de las herramientas que tengas instaladas y crea
-`.aura/project.md` (el perfil) para que lo completes.
+That's it: the skills work right away with sensible defaults. Then, when you have five minutes,
+adapt the git policy to your team (below).
 
-| Opción | Qué hace |
+## What's inside, and what you do with each file
+
+| File | What it does | What you do |
+|---|---|---|
+| [`aura-workflow`](skills/aura-workflow/SKILL.md) | The entry point. Sizes every request on two axes — how much process (direct · builder + reviewer · team) and how much verification (normal · elevated · critical) — and picks the lightest mode that covers the risk. Also covers the Aura mailbox and resuming after a crash. | ✅ **Use as is** |
+| [`aura-lead`](skills/aura-lead/SKILL.md) | For the agent that plans, assigns and reviews. Turns requests into checkable specs, splits work so agents don't collide, and runs the **Gate**: verifies every delivery and can reject it. Loads its guides on [specs](skills/aura-lead/references/spec.md), [assignment](skills/aura-lead/references/assignment.md) and [the Gate](skills/aura-lead/references/gate.md) only when needed. | ✅ **Use as is** |
+| [`aura-builder`](skills/aura-builder/SKILL.md) | For the agent that builds. One task, isolated, verified with numbers, delivered with an honest handoff. Never merges. | ✅ **Use as is** |
+| [`aura-git-isolation`](skills/aura-git-isolation/SKILL.md) | One task = one branch = one worktree; safe staging; commits that say which agent made them. **Starts with your git policy:** base branch, target branch, merge style, commit convention. | ✏️ **Adapt once** to your company or git flow. Works with defaults until you do |
+| [`aura-model-roster`](skills/aura-model-roster/SKILL.md) | A dated catalog of the models behind your agents: tier, strengths and weaknesses, price, limits, privacy, browser access. The lead uses it to decide who gets each task. | 🔄 **Keep updated.** Models change monthly. Refresh it yourself, or reinstall to get ours. The lead warns you when it's more than 30 days old |
+| [`.aura/project.md`](templates/project.md) | Optional project profile: your test commands, where specs go, shared files, product rules, your agents — and **a record of how each model actually behaved on your project.** | 📝 **Optional.** Created with `--profile`. Without it, agents read your `AGENTS.md`, README and package scripts |
+
+**Why split by role?** The builder doesn't load the reviewer's rules, so a cheaper model that only
+builds spends its context on your code, not on process.
+
+## Adapt the git policy (once)
+
+Open `aura-git-isolation/SKILL.md` and fill the **"Your git policy"** table at the top. Empty
+values fall back to the defaults: a branch per task from your default branch, the reviewer
+merges, Conventional Commits.
+
+| If your team uses… | Set |
 |---|---|
-| `--project <dir>` | Instala en ese repo (por defecto, la carpeta actual) |
-| `--user` | Instala para todos tus proyectos |
-| `--tool claude\|codex\|opencode` | Solo para esa herramienta. Se puede repetir. Por defecto, las que estén en el `PATH`. Si no detecta la tuya (por ejemplo, instalada con nvm), pasá `--tool` |
-| `--profile` | Crea `.aura/project.md` desde la plantilla, si no existe |
-| `--force` | Reemplaza las skills que modificaste. La copia vieja va a `~/.aura/skills-backup/` |
-| `--dry-run` | Muestra lo que haría, sin tocar nada |
+| GitHub flow / trunk-based | base and target `main`, integration `pull-request` |
+| Git flow | base and target `develop`; releases cut by a human |
+| A staging branch | base `main`, target `staging` |
+| Just you and one agent | integration `solo`: nothing is pushed or merged unless you ask |
 
-**Nunca pisa una skill que modificaste** sin `--force`.
+Install it with `--user` and every repository you work on follows the same policy. The installer
+**never overwrites a skill you changed**, so your edits survive updates. To take a newer version of
+this skill later, reinstall with `--force` and copy your policy table back from the backup it
+prints.
 
-### Dónde las busca cada herramienta
+**Also protect your target branch** in GitHub/GitLab. "The builder never merges" is an
+instruction to a model. A protected branch is a guarantee.
 
-Medido el 2026-10-08 en Linux, poniendo una skill de prueba en cada carpeta y preguntándole a
-cada herramienta cuáles ve.
+## Keep the model roster fresh
 
-| Herramienta (versión) | Proyecto | Usuario | `install.sh` usa |
+The roster carries a **"Last reviewed"** date. When it's more than 30 days old, the lead tells you
+before assigning work and offers to refresh it. To refresh:
+
+- **Get ours:** `git pull` in `aura-skills`, then run `install.sh` again. Skills you never edited
+  update themselves; the installer keeps a fingerprint of what it installed and can tell.
+- **Do it yourself:** ask your lead agent to refresh it. §6 of the roster lists where each number
+  comes from.
+
+How models behaved **on your project** goes in the record of `.aura/project.md`, not in the roster.
+That record outranks any benchmark, and updating the roster never erases it.
+
+## Installer options
+
+```bash
+./install.sh [--project <dir> | --user] [--tool claude|codex|opencode]... [--profile] [--force] [--dry-run]
+```
+
+| Option | What it does |
+|---|---|
+| `--project <dir>` | Install into that repository (default: the current folder) |
+| `--user` | Install for all your projects |
+| `--tool <name>` | Only for that tool. Repeatable. Default: the ones found on your `PATH` — if yours isn't detected (e.g. installed through nvm), pass it |
+| `--profile` | Also create `.aura/project.md` from the template, marked **DRAFT** until you fill it in |
+| `--force` | Replace skills you modified. Your copy goes to `~/.aura/skills-backup/` |
+| `--dry-run` | Show what would change; touch nothing |
+
+### Where each tool looks for skills
+
+Measured on 2026-10-08 on Linux, by placing a probe skill in each folder and asking each tool
+which ones it sees.
+
+| Tool (version) | Project | User | `install.sh` uses |
 |---|---|---|---|
 | Claude Code 2.1.294 | `.claude/skills` | `~/.claude/skills` | `.claude/skills` |
 | Codex CLI 0.161.0 | `.agents/skills`, `.codex/skills` | `~/.agents/skills`, `~/.codex/skills` | `.agents/skills` |
 | OpenCode 1.18.35 | `.opencode/skills`, `.claude/skills`, `.agents/skills` | `~/.config/opencode/skills`, `~/.claude/skills`, `~/.agents/skills` | `.agents/skills` |
 
-Con **dos carpetas** (`.claude/skills` y `.agents/skills`) alcanza para las tres. Si usás Claude
-Code y OpenCode a la vez, OpenCode lee las dos carpetas y lista cada skill **una sola vez** (medido
-con OpenCode 1.18.35). Las dos copias son idénticas.
+Two folders (`.claude/skills` and `.agents/skills`) cover all three. OpenCode reads both and lists
+each skill once.
 
-**A mano (Windows o cualquier sistema):** copiá cada carpeta de `skills/` a la carpeta de skills
-de tu herramienta, según la tabla.
+**Windows, or by hand:** copy each folder from `skills/` into your tool's skills folder, following
+the table. **Antigravity:** not verified yet.
 
-**Antigravity:** sin verificar todavía.
+## Do I need Aura?
 
-## El perfil del proyecto: `.aura/project.md`
+No. Without Aura, the skills work the same: one agent alone, or several with you passing messages
+between them.
 
-Las skills son iguales en todos los proyectos. **Lo propio del tuyo va en un solo archivo**, que
-las skills leen:
+With [Aura Desktop](https://app.aura-ai.dev/install), every Claude Code, Codex or OpenCode agent you
+open in one of its terminals gets the `aura-mailbox` MCP server, and the skills teach it to:
+report what it's doing (`set_status`), read the rules you pinned for the session (`list_peers`),
+ask for and deliver work (`send_message` with `kind: request` / `handoff`), and track tasks on the
+session board (`update_task`). Requires Aura Runtime 0.1.0-beta.6 or later.
 
-- rama base, adónde se integra y cómo (merge del Gate, pull request, o trabajando solo);
-- qué está autorizado sin preguntar y qué se pregunta siempre;
-- dónde van las specs y el tablero, si los usás;
-- **qué verifica el Builder y qué el Gate** (los comandos de tu repo);
-- áreas, archivos que muchas tareas tocan, reglas de producto, trampas conocidas;
-- tus agentes y modelos, la estrategia de reparto (calidad · equilibrio · costo) y un registro
-  de cómo se portó cada uno.
+## Write your own skills
 
-Plantilla: [`templates/project.md`](templates/project.md). Nace marcado como **BORRADOR**: hasta
-que lo completes y borres esa línea, los agentes no lo usan y no autoriza nada. Borrá lo que no
-uses: un perfil corto se lee entero.
+For what's yours — what your repo is, your design system — there are templates:
 
-El perfil **complementa** tu `AGENTS.md` o `CLAUDE.md`, no lo reemplaza. Si se contradicen, gana
-lo que diga el usuario.
+- [`templates/project-context/`](templates/project-context/SKILL.md): what the repo is, glossary,
+  boundaries, decisions that aren't reopened.
+- [`templates/design-system/`](templates/design-system/SKILL.md): tokens, surfaces, typography,
+  components, anti-patterns.
 
-## ¿Necesito Aura?
+A skill is a folder with a `SKILL.md`. Its `description` is what the agent reads to decide when to
+load it: write it as "when" + "what". Keep it short — past ~170 lines, nobody reads it all.
 
-No. Sin Aura, las skills funcionan igual: un agente solo, o varios con vos pasando los mensajes.
-Con [Aura Desktop](https://app.aura-ai.dev/install), cada agente de Claude Code, Codex u OpenCode
-que abrís en una de sus terminales tiene el servidor MCP `aura-mailbox`, y las skills le enseñan a usarlo: avisar en qué está
-(`set_status`), leer las reglas que fijaste para la sesión (`list_peers`), pedir y entregar trabajo (`send_message` con `kind: request` / `handoff`) y
-anotar tareas en el tablero de la sesión (`update_task`).
+## What they don't do (yet)
 
-## Escribir tus propias skills
+So nobody assumes otherwise:
 
-Para lo que es tuyo —qué es tu repo, tu design system— hay plantillas:
+- **They don't guarantee exclusivity.** Two agents could take the same task. That's why nothing is
+  assigned until the other agent confirms. The Aura mailbox board shows; it doesn't assign.
+- **They don't enforce permissions.** Protect your branches in your git provider.
+- **They don't know which model sits behind each agent** unless you write it in the profile.
+- **Aura doesn't install them for you yet:** use `install.sh`, or copy them by hand.
 
-- [`templates/project-context/`](templates/project-context/SKILL.md): qué es el repo, glosario,
-  fronteras, decisiones que no se reabren.
-- [`templates/design-system/`](templates/design-system/SKILL.md): tokens, superficies,
-  tipografía, componentes, anti-patterns.
-
-Una skill es una carpeta con un `SKILL.md`. La `description` es lo que el agente lee para decidir
-cuándo cargarla: escribila como «cuándo» + «qué». Mantenela corta: con más de ~170 líneas, nadie
-la lee entera.
-
-## Qué no hacen (todavía)
-
-Lo decimos para que nadie lo suponga:
-
-- **No garantizan exclusividad.** Dos agentes podrían tomar la misma tarea. Por eso un pedido no
-  está asignado hasta que el otro confirma. El tablero del buzón es declarado: muestra, no
-  asigna.
-- **No hacen cumplir permisos.** «El Builder no mergea» es una instrucción. Si querés una
-  garantía, protegé la rama en tu proveedor de git.
-- **No saben qué modelo hay detrás de cada agente** si vos no lo escribís en el perfil.
-- **Aura todavía no las instala sola**: por ahora, `install.sh` o a mano.
-
-## Licencia
+## License
 
 [MIT](LICENSE)

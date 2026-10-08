@@ -1,68 +1,70 @@
-# Repartir trabajo entre agentes y modelos
+# Assigning work across agents and models
 
-Asigná por **capacidades y permisos, no por marcas**. Los modelos cambian cada pocas semanas.
-Esta guía es el **método**, que no caduca. Los **datos** (qué modelo tenés, cuánto cuesta, cómo
-se portó) van en el registro de tu perfil.
+Assign by **capabilities and permissions, not by brand.** This file is the **method**, which
+doesn't go stale. The **data** — which models exist, what they cost, what they're good at — is in
+the skill `aura-model-roster`, which gets refreshed. **How each model behaved on your project** is
+in the profile's model record (`.aura/project.md`), and that beats both.
 
-## 1. Filtro duro: ¿quién es elegible?
+## 1. Hard filter: who is eligible?
 
-Descartá a quien no cumpla un requisito obligatorio:
+Drop anyone who misses a hard requirement:
 
-- **Herramientas:** ¿la tarea requiere navegador? ¿Terminal? ¿Docker? ¿Pushear?
-- **Acceso:** ¿ve el repo? ¿Tiene las credenciales de prueba que hacen falta?
-- **Disponibilidad:** ¿está libre (`list_peers` / `set_status`)? Nunca le asignes a un agente
-  ausente.
-- **Cuota y contexto:** ¿le alcanza la cuota para terminar? ¿Y el contexto para retener la spec y
-  el perfil hasta el final? Un agente que se queda sin cuota a mitad de camino entrega un árbol a
-  medias, que es peor que no haber empezado.
-- **Privacidad:** un proveedor que entrena con tus prompts no construye código propietario.
+- **Tools:** does the task need a browser? A terminal? Docker? Pushing?
+- **Access:** can it see the repo? Does it have the test credentials it needs?
+- **Availability:** is it free (`list_peers` / `set_status`)? Never assign to an agent that's gone.
+- **Quota and context:** does it have enough quota to finish? Enough context to hold the spec and
+  the profile to the end? An agent that runs out of quota halfway leaves a half-built tree, which
+  is worse than never starting.
+- **Privacy:** a provider that trains on your prompts doesn't build proprietary code. The roster
+  says which ones do.
 
-Si la tarea requiere navegador y el mejor candidato no tiene, **emparejalo** con uno que sí, y
-el handoff incluye los pasos para que el otro mire.
+If the task needs a browser and the best candidate has none, **pair it** with one that has, and
+the handoff includes the steps for the other one to look.
 
-## 2. Entre los elegibles: calidad, costo, tiempo
+## 2. Among the eligible: quality, cost, time
 
-Según la estrategia del perfil:
+Following the profile's strategy:
 
-| Estrategia | Regla |
+| Strategy | Rule |
 |---|---|
-| `calidad` | El más capaz que esté libre, salvo que sea un desperdicio obvio |
-| `equilibrio` (por defecto) | Modelos capaces para specs, decisiones y Gate; eficientes para lo bien especificado |
-| `costo` | El más barato que sea elegible, con la spec al nivel más literal del dial |
+| `quality` | The most capable free agent, unless that's an obvious waste |
+| `balanced` (default) | Capable models for specs, decisions and the Gate; efficient ones for well-specified work |
+| `cost` | The cheapest eligible one, with the spec at the most literal setting of the dial |
 
-**Qué mirar de un modelo**, en este orden:
+**What to look at in a model**, in this order:
 
-1. Benchmarks **agénticos** (resolver issues reales, terminal, uso de herramientas), no de trivia.
-2. Contexto largo **real**: ¿retiene lo que leyó al principio?
-3. **El nivel de esfuerzo** con el que corre. Pesa más que el tier: un modelo barato pensando a
-   fondo puede ganarle a uno caro sin razonamiento.
-4. **Cumplimiento de protocolo y honestidad:** ¿se aísla?, ¿pushea?, ¿escribe el handoff?,
-   ¿declara lo que no verificó? Ningún benchmark lo mide: **solo tu registro**.
-5. Cuota, y recién después precio.
+1. **Agentic** benchmarks (real issues, terminal work, tool use) — not trivia.
+2. **Real** long context: does it still remember what it read at the start?
+3. **The reasoning effort it runs at.** It weighs more than the tier: a cheap model thinking hard
+   can beat an expensive one with reasoning off.
+4. **Protocol and honesty:** does it isolate, push, write the handoff, declare what it didn't
+   verify? No benchmark measures this. **Only your record does.**
+5. Quota — and only then price.
 
-## 3. El dial: cuánto detalle lleva la spec
+## 3. The dial: how much detail the spec carries
 
-| Quién la toma | Cómo se escribe |
+| Who takes it | How it's written |
 |---|---|
-| Modelo de frontera | Contrato, criterios y un patrón existente de referencia |
-| Modelo intermedio | Más los pasos y los archivos exactos |
-| Modelo económico o acotado | La API escrita: `archivo:línea`, firmas, valores, cero decisiones abiertas |
+| Frontier model | Contract, criteria and an existing reference pattern |
+| Strong model | Plus the steps and the exact files |
+| Efficient or narrow model | The API written out: `file:line`, signatures, values, zero open decisions |
 
-**Si no te sale escribirla así de literal, la tarea no es para ese agente.**
+**If you can't write it that literally, the task isn't for that agent.**
 
-## 4. Reglas de reparto
+## 4. Assignment rules
 
-- **Una tarea por agente a la vez.** Un claim, una rama, un worktree.
-- **Áreas disjuntas o en serie.** Dos agentes no comparten un archivo imán.
-- **Ojo con lo caro de aislar:** si un worktree pesa varios GB o compila minutos (lo dice el
-  perfil), no abras seis en paralelo.
-- **Modelo sin registro → primero una tarea de prueba acotada.** Mirá si se aísla, si pushea, si
-  el handoff declara lo no verificado y si **para** cuando la spec está mal.
-- **El que se libera recibe la siguiente tarea antes de que hagas el Gate de la anterior.**
+- **One task per agent at a time.** One claim, one branch, one worktree.
+- **Separate areas, or one after the other.** Two agents never share a shared file.
+- **Watch out for expensive isolation:** if a worktree weighs several GB or compiles for minutes
+  (the profile says), don't open six in parallel.
+- **A model with no record gets a small trial task first.** Watch whether it isolates, pushes,
+  declares what it didn't verify in the handoff, and **stops** when the spec is wrong.
+- **Whoever frees up gets the next task before you gate their previous one.**
 
-## 5. Anti-reglas
+## 5. Anti-rules
 
-- No partas una tarea para ocupar a un agente libre. Partila porque no entra en una spec.
-- No le des la tarea más difícil al más barato: un rebote cuesta más que la diferencia.
-- La fama no manda: manda tu registro.
-- No pongas nombres de modelos ni precios en una skill: caducan. Van en el perfil.
+- Don't split a task to keep an idle agent busy. Split it because it doesn't fit in one spec.
+- Don't give the hardest task to the cheapest model: a bounce costs more than the difference.
+- Reputation doesn't decide. Your record does.
+- Don't write model names or prices in this file. They live in `aura-model-roster`, which is
+  meant to change.

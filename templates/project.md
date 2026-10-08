@@ -1,87 +1,82 @@
-# Perfil del proyecto — <nombre del repo>
+# Project profile — <repo name>
 
-> ⚠️ **BORRADOR — todavía no completado.** Mientras esta línea exista, los agentes tratan el
-> perfil como vacío: no autoriza nada y sus comandos no se corren. Completalo y borrá esta línea.
+> ⚠️ **DRAFT — not filled in yet.** While this line exists, agents treat the profile as missing:
+> it authorizes nothing and its commands are not run. Fill it in and delete this line.
 
 <!--
-Copiá este archivo a `.aura/project.md` en la raíz de tu repo y completalo.
-Las skills de Aura lo leen para saber lo que es propio de TU proyecto. El método va en las
-skills; los datos, acá.
+Optional. The Aura skills work without it: agents read your AGENTS.md / CLAUDE.md / README and
+your package scripts. Write this file when you want them to stop guessing.
 
-- Borrá las secciones que no apliquen. Un perfil corto se lee entero; uno largo, no.
-- Complementa a AGENTS.md / CLAUDE.md, no los reemplaza. Si ya tenés esto escrito ahí,
-  poné un enlace en vez de copiarlo.
-- Aura no lee este archivo: lo leen tus agentes. Es texto para un modelo, no configuración.
+- It holds what is specific to THIS repo. Your company-wide git policy lives in the skill
+  aura-git-isolation (adapt it once); override a value here only if this repo is different.
+- It adds to AGENTS.md / CLAUDE.md; it never replaces them. If something is already written
+  there, link to it instead of copying it.
+- Delete every section you don't need. A short profile gets read in full; a long one doesn't.
+- Aura doesn't parse this file. Your agents read it. It's text for a model, not configuration.
 -->
 
-## 🔴 Cambios que derogan lo anterior
-<!-- Lo más reciente arriba, con fecha. Así un agente sabe qué regla vieja ya no vale. -->
-- AAAA-MM-DD: <qué cambió>
+## 🔴 Changes that override earlier rules
+<!-- Newest first, with a date, so an agent knows which old rule no longer holds. -->
+- YYYY-MM-DD: <what changed>
 
-## Cómo trabajamos
+## How we work
 
-- **Modo por defecto:** <adaptativo>   <!-- adaptativo · directo · builder-gate · equipo -->
-- **Rama base:** <main>                <!-- de dónde salen las ramas de tarea -->
-- **Integración:** <gate-merges>       <!-- gate-merges · pull-request · solo -->
-- **Destino:** <main>                  <!-- adónde se integra; casi siempre = la base (o p. ej. staging) -->
-- **Remoto:** <origin>
-- **Idioma de commits y specs:** <inglés>
-- **Autorizado sin preguntar:** <p. ej. pushear ramas de tarea>   <!-- vacío = nada; se pregunta todo -->
-- **Siempre preguntar:** <p. ej. deploy, release, migraciones en producción, borrar datos>
+- **Default mode:** <adaptive>          <!-- adaptive · direct · builder-gate · team -->
+- **Allowed without asking:** <e.g. pushing task branches>   <!-- empty = nothing; ask for everything -->
+- **Always ask:** <e.g. deploys, releases, production migrations, deleting data>
+- **Git policy overrides:** <none>      <!-- e.g. "target branch: staging" -->
 
-## Tareas y specs
+## Tasks and specs
 
-- **Specs:** <docs/specs/<slug>/>      <!-- o: una entrada en docs/TAREAS.md · o: en el mensaje -->
-- **Tablero:** <docs/progress/current.md>   <!-- o: "solo el buzón de Aura" -->
-- **Historial:** <docs/progress/history.md>
-- **Reclamar una tarea:** <git worktree add ../<repo>--<agente>--<slug> -b feature/<slug> <remoto>/<base>>
-  <!-- o el helper del repo, p. ej. bin/agente start <tool> <slug> "<área>" -->
+- **Specs:** <docs/specs/<slug>/>       <!-- or: an entry in docs/TASKS.md · or: in the message -->
+- **Task board:** <docs/progress/current.md>   <!-- or: "only the Aura mailbox" -->
+- **History:** <docs/progress/history.md>
+- **Claim a task:** <git worktree … (default) or your helper, e.g. bin/agent start <task>>
 
-## Verificación
+## Verification
 
-**verify.builder** — lo que corre quien construye:
+**Builder runs:**
 ```bash
-<p. ej. npm run build && npm test>
+<e.g. npm run build && npm test>
 ```
 
-**verify.gate** — lo que además corre quien revisa:
+**Gate also runs:**
 ```bash
-<p. ej. npm run e2e>
+<e.g. npm run e2e>
 ```
-<!-- y lo que no es un comando: "probar en el navegador en 1440×900 y 390×844",
-     "probar contra el paquete instalable, no contra el modo dev" -->
+<!-- and what isn't a command: "check in the browser at 1440×900 and 390×844",
+     "test the installed package, not dev mode" -->
 
-**Aislamiento del stack** (si el Builder levanta servicios):
-<!-- p. ej. "puertos = 3000 + slot; proyecto de compose = <repo>-<slot>" -->
+**Stack isolation** (if the Builder starts services): <e.g. "ports = 3000 + slot; compose project = <repo>-<slot>">
 
-**Costo de un worktree:** <!-- p. ej. "~5 GB y 2 min de compilación: no más de 2 en paralelo" -->
+**Cost of a worktree:** <e.g. "~5 GB and 2 min to compile: at most 2 in parallel">
 
-## Áreas y archivos imán
+## Areas and shared files
 
-| Área | Directorios |
+| Area | Directories |
 |---|---|
-| API | src/api/ |
-| UI | src/ui/ |
+| <API> | <src/api/> |
 
-**Imanes** (una tarea a la vez): CHANGELOG.md, src/lib/types.ts, package-lock.json
+**Shared files** (one task at a time): <CHANGELOG.md, src/lib/types.ts, package-lock.json>
 
-## Reglas de producto (el Gate no integra sin esto)
+## Product rules (the Gate doesn't merge without them)
 
-- <p. ej. "nada de dangerouslySetInnerHTML con texto que viene del servidor">
-- <p. ej. "toda ruta nueva lleva test de autorización">
+- <e.g. "no dangerouslySetInnerHTML with text that comes from the server">
 
-## Trampas vivas
+## Known traps
 
-- <lo que ya le costó a alguien, p. ej. "/usr/bin/node es v18 y rompe vite: usar v24">
+- <what already cost someone, e.g. "/usr/bin/node is v18 and breaks vite: use v24">
 
-## Agentes y modelos
+## Our agents
 
-**Estrategia de reparto:** equilibrio   <!-- calidad · equilibrio · costo -->
+**Assignment strategy:** <balanced>     <!-- quality · balanced · cost -->
 
-| Agente | Herramienta · modelo | Navegador | Notas (cuota, privacidad) |
+| Agent | Tool · model | Browser | Notes (quota, privacy) |
 |---|---|---|---|
-| claude-1 | Claude Code · <modelo> | sí | |
-| codex-1 | Codex · <modelo> | no | |
+| <claude-1> | <Claude Code · model> | <yes> | |
 
-**Registro medido** (lo anota el Gate al cerrar cada tarea; lo más reciente arriba):
-- AAAA-MM-DD · <herramienta·modelo> · <tarea> · <aprobado a la primera / rechazado: motivo> · <¿handoff honesto?>
+What each model is good at in general lives in the skill `aura-model-roster`.
+**This** is how they behaved here — it outranks the roster.
+
+**Model record** (the Gate adds a line when closing each task; newest first):
+- YYYY-MM-DD · <tool·model> · <task> · <approved first time / rejected: reason> · <honest handoff?>

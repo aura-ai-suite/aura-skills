@@ -1,34 +1,34 @@
 ---
-name: <repo>-contexto
-description: Qué es <repo> y qué NO es — su propósito, el glosario, las fronteras con otros sistemas y las decisiones que no se reabren. Usala en tu primera tarea en este repo, al retomar en una sesión nueva, al nombrar entidades, o cuando dos documentos parezcan contradecirse.
+name: <repo>-context
+description: What <repo> is and what it is NOT — its purpose, glossary, boundaries with other systems and the decisions that aren't reopened. Use it on your first task in this repo, when resuming in a new session, when naming entities, or when two documents seem to contradict each other.
 ---
 
 <!--
-Plantilla de skill de contexto de proyecto. Copiala a <carpeta de skills>/<repo>-contexto/SKILL.md,
-renombrala y completala. Tope recomendado: 150 líneas. Lo que no entre, va en docs/ con un enlace.
+Template for a project-context skill. Copy it to <your skills folder>/<repo>-context/SKILL.md,
+rename it and fill it in. Recommended cap: 150 lines. Whatever doesn't fit goes in docs/ with a link.
 -->
 
-# <Repo> — contexto
+# <Repo> — context
 
-## 1. Qué es, en una frase
-<Para quién y para qué.>
+## 1. What it is, in one sentence
+<For whom, and what for.>
 
-## 2. Qué NO es
-<Lo que un agente nuevo va a querer agregar y no corresponde. Una línea por cosa.>
+## 2. What it is NOT
+<What a new agent will want to add and doesn't belong. One line each.>
 
-## 3. Glosario — un concepto, un nombre
-| Término | Significa | No confundir con |
+## 3. Glossary — one concept, one name
+| Term | Means | Don't confuse with |
 |---|---|---|
 
-## 4. Fronteras
-<Con qué otros sistemas habla, qué decide este repo y qué decide el otro.>
+## 4. Boundaries
+<Which other systems it talks to, what this repo decides and what the other one decides.>
 
-## 5. Precedencia — si dos documentos se contradicen
-1. Lo que dice el usuario en la sesión
+## 5. Precedence — when two documents disagree
+1. What the user says in the session
 2. <AGENTS.md / ADRs / …>
 
-## 6. Decisiones que no se reabren
-<Con enlace a dónde está el porqué.>
+## 6. Decisions that aren't reopened
+<With a link to where the reasoning lives.>
 
-## 7. Pará y preguntá si tu tarea…
-<toca X, cambia Y, depende de Z>
+## 7. Stop and ask if your task…
+<touches X, changes Y, depends on Z>

@@ -1,38 +1,39 @@
 ---
 name: <repo>-design-system
-description: El sistema visual de <repo> — tokens de color, superficies, tipografía, espaciado, movimiento y los componentes base, con lo que NO se hace. Usala antes de tocar cualquier color, sombra, tipografía o animación, antes de crear un componente de UI, y ante cualquier duda visual.
+description: The visual system of <repo> — color tokens, surfaces, typography, spacing, motion and the base components, plus what NOT to do. Use it before touching any color, shadow, font or animation, before creating a UI component, and whenever you're unsure about something visual.
 ---
 
 <!--
-Plantilla de skill de design system. Copiala, renombrala y completala con TU marca.
-Tope recomendado: 170 líneas. Si crece, partila en dos: fundamentos (tokens) y componentes.
+Template for a design-system skill. Copy it, rename it and fill it in with YOUR brand.
+Recommended cap: 170 lines. If it grows, split it in two: foundations (tokens) and components.
 -->
 
 # <Repo> — design system
 
-## 0. Antes de crear un componente
-Buscá si ya existe en <ruta de componentes>. Si existe, usalo. No copies clases de una página a otra.
+## 0. Before creating a component
+Check whether it already exists in <components path>. If it does, use it. Don't copy classes from
+one page to another.
 
 ## 1. Tokens
-| Token | Valor | Uso | Nunca para |
+| Token | Value | Use | Never for |
 |---|---|---|---|
 
-## 2. Superficies
-<Niveles de fondo, bordes y sombras, del más bajo al más alto.>
+## 2. Surfaces
+<Background levels, borders and shadows, lowest to highest.>
 
-## 3. Tipografía
-<Familias, tamaños y cuándo va cada una.>
+## 3. Typography
+<Families, sizes and when each one is used.>
 
-## 4. Espaciado, radios, bordes
+## 4. Spacing, radii, borders
 
-## 5. Movimiento
-<Duraciones, curvas, y respetar prefers-reduced-motion.>
+## 5. Motion
+<Durations, easing, and respect prefers-reduced-motion.>
 
-## 6. Componentes base
-<Botón, input, card, badge: dónde viven y sus variantes.>
+## 6. Base components
+<Button, input, card, badge: where they live and their variants.>
 
-## 7. Accesibilidad
-<Contraste mínimo, foco visible, tamaños táctiles.>
+## 7. Accessibility
+<Minimum contrast, visible focus, touch target sizes.>
 
 ## 8. Anti-patterns
-<Lo que ya salió mal y no se repite.>
+<What already went wrong and must not happen again.>

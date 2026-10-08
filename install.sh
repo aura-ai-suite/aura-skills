@@ -12,11 +12,12 @@
 #                    ~/.aura/skills-backup/<date>/ (outside the skill folders, so no tool loads it twice).
 #   --dry-run        Print what would change; touch nothing.
 #
-# Never overwrites a skill you changed unless --force is given.
+# Updates a skill only if you never edited it: each installed skill keeps a fingerprint of what
+# was installed (.aura-installed). A skill you changed is kept unless --force is given.
 set -euo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILLS=(aura-workflow aura-lead aura-builder aura-git-isolation)
+SKILLS=(aura-workflow aura-lead aura-builder aura-git-isolation aura-model-roster)
 BACKUP="$HOME/.aura/skills-backup/$(date +%Y%m%d-%H%M%S)"
 
 scope=project dir="$PWD" force=0 dry=0 profile=0 tools=()
@@ -59,6 +60,12 @@ fi
 
 run() { if [ "$dry" = 1 ]; then echo "  would: $*"; else "$@"; fi; }
 
+if command -v sha256sum >/dev/null 2>&1; then sha() { sha256sum; }; else sha() { shasum -a 256; }; fi
+# Fingerprint of a skill folder: every file's path and content, ignoring our own marker.
+fingerprint() { (cd "$1" && find . -type f ! -name .aura-installed | LC_ALL=C sort | while IFS= read -r f; do
+  printf '%s %s\n' "$f" "$(sha < "$f" | cut -c1-64)"; done | sha | cut -c1-64); }
+MARK=.aura-installed
+
 changed=0 skipped=0 seen=" "
 for t in "${tools[@]}"; do
   dst="$(target "$t" "$scope")"
@@ -66,22 +73,29 @@ for t in "${tools[@]}"; do
   seen="$seen$dst "
   echo "$t → $dst"
   for s in "${SKILLS[@]}"; do
+    new="$(fingerprint "$SRC/skills/$s")"
     if [ -d "$dst/$s" ]; then
-      if diff -rq "$SRC/skills/$s" "$dst/$s" >/dev/null 2>&1; then
+      cur="$(fingerprint "$dst/$s")"
+      if [ "$cur" = "$new" ]; then
         echo "  = $s (up to date)"; continue
       fi
-      if [ "$force" != 1 ]; then
-        echo "  ! $s differs from this version — kept yours (use --force to replace)"
+      if [ "$(cat "$dst/$s/$MARK" 2>/dev/null)" = "$cur" ]; then
+        run rm -rf "$dst/$s"
+        echo "  ↑ $s updated (you hadn't edited it)"
+      elif [ "$force" != 1 ]; then
+        echo "  ! $s was edited by you — kept yours (use --force to replace)"
         skipped=$((skipped + 1)); continue
+      else
+        run mkdir -p "$BACKUP/$t-$scope"
+        run mv "$dst/$s" "$BACKUP/$t-$scope/$s"
+        echo "  ~ $s replaced (your copy is in $BACKUP/$t-$scope/$s)"
       fi
-      run mkdir -p "$BACKUP/$t-$scope"
-      run mv "$dst/$s" "$BACKUP/$t-$scope/$s"
-      echo "  ~ $s replaced (previous copy in $BACKUP/$t-$scope/$s)"
     else
       echo "  + $s"
     fi
     run mkdir -p "$dst"
     run cp -R "$SRC/skills/$s" "$dst/$s"
+    if [ "$dry" = 1 ]; then echo "  would: record fingerprint"; else echo "$new" > "$dst/$s/$MARK"; fi
     changed=$((changed + 1))
   done
 done
@@ -94,7 +108,7 @@ if [ "$profile" = 1 ]; then
   else
     run mkdir -p "$dir/.aura"
     run cp "$SRC/templates/project.md" "$dir/.aura/project.md"
-    echo "profile: $dir/.aura/project.md created from the template — fill it in"
+    echo "profile: $dir/.aura/project.md created from the template (marked DRAFT) — fill it in"
   fi
 fi
 

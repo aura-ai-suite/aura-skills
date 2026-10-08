@@ -1,67 +1,65 @@
-# El Gate — verificar una entrega
+# The Gate — verifying a delivery
 
-El Gate separa **«está implementado»** de **«está listo para integrarse»**. Un Builder puede
-decir que terminó, con los tests en verde, y el Gate igual lo rechaza si ve algo que va a afectar
-al usuario.
+The Gate separates **"it's implemented"** from **"it's ready to merge."** A Builder can say it's
+done, with green tests, and the Gate still rejects it if it sees something that will hit users.
 
-## 0. ¿Hay entrega?
+## 0. Is there a delivery?
 
 ```bash
 git fetch origin
-git log --oneline <base>..origin/<rama>     # ¿hay commits en el remoto?
+git log --oneline <base>..origin/<branch>     # are there commits on the remote?
 ```
 
-- ¿La rama existe **en el remoto**? En un equipo, un commit que solo está en el disco del Builder
-  no existe. (En modo `solo` sin push autorizado, se revisa la rama local con el SHA del handoff.)
-- ¿Hay handoff? Y si hay buzón, ¿llegó como `kind: handoff`?
-- ¿El SHA del handoff coincide con el del remoto?
+- Does the branch exist **on the remote**? In a team, a commit that only lives on the Builder's
+  disk doesn't exist. (Working solo without push permission, review the local branch at the
+  commit named in the handoff.)
+- Is there a handoff? With the mailbox, did it arrive as `kind: handoff`?
+- Does the commit in the handoff match the remote?
 
-Si falta algo: pedilo. No vayas a buscarlo al disco de otro.
+If something is missing, ask for it. Don't go digging on someone else's disk.
 
-## 1. Leé el handoff empezando por abajo
+## 1. Read the handoff bottom-up
 
-1. **⚠️ Sin verificar.** Es lo primero que revisás.
-2. **Chequeos con número.** Un ✅ suelto no es un chequeo.
-3. **Desviaciones de la spec.** ¿Están justificadas?
+1. **⚠️ Not verified.** That's where you start.
+2. **Checks with numbers.** A bare ✅ is not a check.
+3. **Deviations from the spec.** Are they justified?
 
-## 2. Corré, no asumas
+## 2. Run, don't assume
 
-- [ ] Cada criterio de aceptación, uno por uno, contra el código real.
-- [ ] Los comandos de verificación del perfil (`verify.gate`), **también lo que el Builder ya
-      declaró verde**.
-- [ ] El diff completo: ¿hay cosas fuera de alcance? ¿Dependencias nuevas sin justificar? ¿Código
-      muerto? ¿Secretos?
-- [ ] Las **reglas de producto** del perfil que apliquen (las «puertas»).
+- [ ] Every acceptance criterion, one by one, against the real code.
+- [ ] The profile's Gate checks — **including what the Builder already declared green.**
+- [ ] The whole diff: anything out of scope? New dependencies without a reason? Dead code?
+      Secrets?
+- [ ] The profile's **product rules** that apply.
 
-## 3. Verificá donde corre el usuario
+## 3. Verify where the user runs it
 
-- **Interfaz:** en el navegador, en los tamaños que diga la spec. Un build verde no prueba nada
-  visual.
-- **Algo que se distribuye empaquetado:** contra el paquete, no contra el modo de desarrollo.
-- **Multiplataforma:** en cada plataforma que la spec nombra, o declarado como no verificado.
-- **Si levantás un stack, que sea el de esa rama.** «Lo corregí pero no aparece» suele ser que
-  estás mirando el stack de otro agente.
+- **UI:** in the browser, at the sizes the spec names. A green build proves nothing visual.
+- **Anything shipped as a package:** against the package, not against dev mode.
+- **Cross-platform:** on every platform the spec names, or declared unverified.
+- **If you start a stack, make sure it's this branch's.** "I fixed it but it doesn't show up"
+  usually means you're looking at another agent's stack.
 
-## 4. Según el nivel de verificación
+## 4. By verification level
 
-| Nivel | Además |
+| Level | On top of the above |
 |---|---|
-| Normal | Lo de arriba |
-| Elevado | Un caso de prueba nuevo que habría fallado antes del cambio |
-| Crítico | Tests nuevos para el camino feliz **y** para el abuso (sin permiso, token vencido, entrada maliciosa). Revisión línea por línea. Sin excepciones por tamaño |
+| Normal | — |
+| Elevated | A new test case that would have failed before the change |
+| Critical | New tests for the happy path **and** for abuse (no permission, expired token, malicious input). Line-by-line review. No exceptions for size |
 
-## 5. Decidí
+## 5. Decide
 
-- **Rechazo:** devolvé la rama con el defecto concreto: qué comando, qué salió, qué esperabas.
-  No lo arregles vos: el Builder aprende y vos no te volvés el cuello de botella. La excepción es
-  un arreglo trivial de última milla, que se anota.
-- **Aprobado:** integrá según el perfil (merge directo o PR) con **la evidencia en el mensaje**:
-  qué corriste y qué salió.
+- **Reject:** send the branch back with the concrete defect — which command, what it printed, what
+  you expected. Don't fix it yourself: the Builder learns, and you don't become the bottleneck.
+  The exception is a trivial last-mile fix, recorded.
+- **Approve:** integrate following the git policy (direct merge or PR) with **the evidence in the
+  message**: what you ran and what came out.
 
-## 6. Cerrá
+## 6. Close
 
-- Mové la tarea de «activa» a «historial» en el tablero del repo, si lo tiene.
-- Liberá el worktree cuando ya nadie lo vaya a retomar.
-- `CHANGELOG` si el perfil lo usa.
-- **Registro del modelo** en el perfil: una línea. «2026-10-08 · codex·sol-6.1 · aprobado a la
-  primera» o «rechazado: caché sin invalidar; handoff honesto».
+- Move the task from "active" to "history" on the repo's board, if it has one.
+- Release the worktree once nobody will pick it up again.
+- `CHANGELOG` if the project keeps one.
+- **Model record** in the profile — one line: "2026-10-08 · codex · <model> · approved first
+  time" or "rejected: stale cache; honest handoff".
