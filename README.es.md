@@ -64,6 +64,8 @@ No hace falta nombrar las skills. Pedí como siempre: el agente las carga cuando
 
 ## Qué trae, y qué hacés con cada archivo
 
+**Solo hacen falta las cinco skills.** Todo lo demás es opcional.
+
 | Archivo | Qué hace | Qué hacés vos |
 |---|---|---|
 | [`aura-workflow`](skills/aura-workflow/SKILL.md) | La puerta de entrada. Mide cada pedido en dos ejes —cuánto proceso (directo · constructor + revisor · equipo) y cuánta verificación (normal · elevada · crítica)— y elige el modo más liviano que cubre el riesgo. También cubre el buzón de Aura y cómo retomar después de un corte. | ✅ **Usala tal cual** |
@@ -162,18 +164,23 @@ contar qué está haciendo (`set_status`), leer las reglas que fijaste para la s
 (`list_peers`), pedir y entregar trabajo (`send_message` con `kind: request` / `handoff`) y anotar
 tareas en el tablero de la sesión (`update_task`). Necesita Aura Runtime 0.1.0-beta.6 o posterior.
 
-## Escribí tus propias skills
+## Escribí tus propias skills (opcional)
 
-Para lo que es tuyo —qué es tu repo, tu design system— hay plantillas:
+Para el flujo de Aura no necesitás ninguna. Si querés una para lo que es tuyo —qué es tu repo, tu
+design system—, una skill es una carpeta con un `SKILL.md`:
 
-- [`templates/project-context/`](templates/project-context/SKILL.md): qué es el repo, glosario,
-  fronteras, decisiones que no se reabren.
-- [`templates/design-system/`](templates/design-system/SKILL.md): tokens, superficies,
-  tipografía, componentes, anti-patterns.
+```markdown
+---
+name: mi-repo-contexto
+description: Qué es mi-repo y qué no, su glosario y sus fronteras. Usala en tu primera tarea acá.
+---
 
-Una skill es una carpeta con un `SKILL.md`. Su `description` es lo que el agente lee para decidir
-cuándo cargarla: escribila como «cuándo» + «qué». Mantenela corta: pasadas las ~170 líneas, nadie
-la lee entera.
+# mi-repo — contexto
+…
+```
+
+La `description` es lo que el agente lee para decidir cuándo cargarla: escribila como «cuándo» +
+«qué». Mantenela corta: pasadas las ~170 líneas, nadie la lee entera.
 
 ## Lo que no hacen (todavía)
 

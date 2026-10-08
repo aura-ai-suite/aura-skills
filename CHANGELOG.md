@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.3 — 2026-10-08
+
+- **Only the five skills are needed.** The README says so up front.
+- Removed the `project-context` and `design-system` templates: no agent loaded them and the Aura
+  workflow doesn't need them. "Write your own skills" now shows a short example instead.
+- The project profile template (`templates/project.md`) stays: `install.sh --profile` uses it.
+
 ## 0.2.2 — 2026-10-08
 
 - **Consistent default permissions:** builders push their own task branch; the Gate asks you

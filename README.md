@@ -62,6 +62,8 @@ You don't have to name the skills. Ask as usual; the agent loads them when they 
 
 ## What's inside, and what you do with each file
 
+**Only the five skills are needed.** Everything else is optional.
+
 | File | What it does | What you do |
 |---|---|---|
 | [`aura-workflow`](skills/aura-workflow/SKILL.md) | The entry point. Sizes every request on two axes — how much process (direct · builder + reviewer · team) and how much verification (normal · elevated · critical) — and picks the lightest mode that covers the risk. Also covers the Aura mailbox and resuming after a crash. | ✅ **Use as is** |
@@ -161,17 +163,23 @@ report what it's doing (`set_status`), read the rules you pinned for the session
 ask for and deliver work (`send_message` with `kind: request` / `handoff`), and track tasks on the
 session board (`update_task`). Requires Aura Runtime 0.1.0-beta.6 or later.
 
-## Write your own skills
+## Write your own skills (optional)
 
-For what's yours — what your repo is, your design system — there are templates:
+You don't need any for the Aura workflow. If you want one for what's specific to you — what your
+repo is, your design system — a skill is a folder with a `SKILL.md`:
 
-- [`templates/project-context/`](templates/project-context/SKILL.md): what the repo is, glossary,
-  boundaries, decisions that aren't reopened.
-- [`templates/design-system/`](templates/design-system/SKILL.md): tokens, surfaces, typography,
-  components, anti-patterns.
+```markdown
+---
+name: my-repo-context
+description: What my-repo is and isn't, its glossary and boundaries. Use it on your first task here.
+---
 
-A skill is a folder with a `SKILL.md`. Its `description` is what the agent reads to decide when to
-load it: write it as "when" + "what". Keep it short — past ~170 lines, nobody reads it all.
+# my-repo — context
+…
+```
+
+The `description` is what the agent reads to decide when to load it: write it as "when" + "what".
+Keep it short — past ~170 lines, nobody reads it all.
 
 ## What they don't do (yet)
 
