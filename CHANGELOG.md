@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.0 — 2026-10-16
+
+- **The model roster covers every model your agents can pick.** 21 models reachable through
+  Claude Code, Codex, OpenCode and Antigravity CLI — tier, strengths, list price, limits, release
+  date — each number linked to the vendor's own page and dated. The full table moved to
+  `aura-model-roster/references/models.md`, loaded only when choosing between models; `SKILL.md`
+  keeps the rules, a "pick by job" table, how to list the models in each tool, dated price changes
+  and removals, and which free OpenCode models may train on your prompts.
+- **The measured record is bigger and anonymous:** what four months of the Aura team's own logs
+  (8 repos, `Agent:` trailers and closing logs) say about each model, every claim with a count and
+  a date range.
+- **Imported Aura Web tasks.** Inside Aura Desktop the skills know the task tools
+  (`aura_tasks_list`, `aura_task_get`, `aura_task_set_status`): an imported task is context, not an
+  assignment; the lead turns one into a spec (its criteria become runnable ones, its assumptions
+  open questions) and still assigns through the chat; status moves only on a task the user
+  assigned to you. Without Aura nothing changes.
+
 ## 0.3.1 — 2026-10-08
 
 - **Which branch each board edit goes in.** The lead edits the board on the base branch; a Builder

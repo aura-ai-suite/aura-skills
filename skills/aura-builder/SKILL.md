@@ -14,6 +14,8 @@ next one. **You don't merge. You don't make architecture calls. You don't approv
 2. With the mailbox: `set_status` → `working`, with the task name in the note. Confirm to the lead
    that you took it (`reply_to` their request).
    If there is a task board (the profile's, or `.aura/board.md`), set **your** section to `Build`.
+   If the lead's request carries an Aura task code and you have `aura_task_get`, read it for
+   context; never move its status (`aura_task_set_status`) unless the user assigned it to you.
 3. **Isolate before you edit the first file** (`aura-git-isolation`): your branch, your worktree.
    Check it, don't assume it:
 

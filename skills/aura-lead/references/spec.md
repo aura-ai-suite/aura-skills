@@ -11,6 +11,8 @@ Wherever the profile says (`.aura/project.md` → Specs). For example:
 - in Builder + Gate mode, the request message itself.
 
 No profile? Use the message for small tasks and `docs/specs/<slug>/` for team work.
+If the spec came from an imported Aura Web task (`aura_task_get <code>`), add the field
+`**From task:** <CODE> (Aura Web link)`.
 This skill doesn't impose the file. **It imposes the content.**
 
 ## Template
