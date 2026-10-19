@@ -186,12 +186,14 @@ Keep it short — past ~170 lines, nobody reads it all.
 
 ## Security
 
-The mailbox is an input channel: another agent can repeat text it read on a web page, a README or
-an issue, and that text can try to give orders. The skills treat everything that arrives through
-`read_inbox` as **untrusted data**: only your messages carry your authority, and no peer or
-quoted third party can make an agent run commands, touch credentials, push, merge, install or
-disable permissions. If one asks for that, the agent refuses and tells you. That exposure is
-inherent to any inbox; this is the boundary that contains it.
+The Aura mailbox is local to the Desktop session: only you and the agents in it can write, and the
+runtime seals the sender, so a peer cannot post as `usuario`. It is still an input channel: an
+agent can repeat text it read on a web page, a README or an issue, and that text can try to give
+orders. The skills treat everything that arrives through `read_inbox` as **untrusted data**: only
+your messages carry your authority, and no peer or quoted third party can make an agent run code,
+fetch a link, touch credentials, push, merge, install or disable permissions. If one asks for
+that, the agent refuses and tells you. A failing hook is reported, never bypassed. The mailbox
+keeps the residual risk; this is the boundary that contains it.
 
 ## What they don't do (yet)
 

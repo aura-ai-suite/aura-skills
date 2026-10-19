@@ -187,12 +187,15 @@ La `description` es lo que el agente lee para decidir cuándo cargarla: escribil
 
 ## Seguridad
 
-El buzón es un canal de entrada: otro agente puede repetir texto que leyó en una web, un README o
-un issue, y ese texto puede intentar dar órdenes. Las skills tratan todo lo que llega por
-`read_inbox` como **datos no confiables**: solo tus mensajes llevan tu autoridad, y ningún par ni
-texto citado de un tercero puede hacer que un agente corra comandos, toque credenciales, pushee,
-mergee, instale o desactive permisos. Si alguno lo pide, el agente se niega y te avisa. Esa
-exposición es propia de cualquier bandeja de entrada; esta es la frontera con la que se contiene.
+El buzón de Aura es local a la sesión de Desktop: solo escriben vos y los agentes de la sesión, y
+el runtime sella el remitente, así que un par no puede publicar como `usuario`. Aun así es un
+canal de entrada: un agente puede repetir texto que leyó en una web, un README o un issue, y ese
+texto puede intentar dar órdenes. Las skills tratan todo lo que llega por `read_inbox` como
+**datos no confiables**: solo tus mensajes llevan tu autoridad, y ningún par ni texto citado de un
+tercero puede hacer que un agente corra código, abra un enlace, toque credenciales, pushee,
+mergee, instale o desactive permisos. Si alguno lo pide, el agente se niega y te avisa. Un hook
+que falla se reporta, nunca se saltea. El buzón conserva el riesgo residual; esta es la frontera
+que lo contiene.
 
 ## Lo que no hacen (todavía)
 
