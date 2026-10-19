@@ -9,7 +9,7 @@ to the public remote). The Gate merges into local `main`.
 
 - **State:** Build (delivered, awaiting Gate)
 - **Spec:** the Snyk W011 notice and claude-2's handoff, in the session chat
-- **Branch:** `fix/w011-mailbox-untrusted` · worktree `../aura-skills--opencode-4--w011`
+- **Branch:** `fix/w011-mailbox-untrusted` @ `e7bceeb` · worktree `../aura-skills--opencode-4--w011`
 - **Next step:** Gate re-reads the boundary against the W011 description and merges locally.
 
 ### Handoff — security-w011 · opencode-4 (DeepSeek V4.1-Flash) · 2026-10-19
