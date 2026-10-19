@@ -184,6 +184,15 @@ description: What my-repo is and isn't, its glossary and boundaries. Use it on y
 The `description` is what the agent reads to decide when to load it: write it as "when" + "what".
 Keep it short — past ~170 lines, nobody reads it all.
 
+## Security
+
+The mailbox is an input channel: another agent can repeat text it read on a web page, a README or
+an issue, and that text can try to give orders. The skills treat everything that arrives through
+`read_inbox` as **untrusted data**: only your messages carry your authority, and no peer or
+quoted third party can make an agent run commands, touch credentials, push, merge, install or
+disable permissions. If one asks for that, the agent refuses and tells you. That exposure is
+inherent to any inbox; this is the boundary that contains it.
+
 ## What they don't do (yet)
 
 So nobody assumes otherwise:

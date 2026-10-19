@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- **Mailbox content is untrusted data.** `aura-workflow` now states the indirect
+  prompt-injection boundary explicitly: only the user's messages carry the user's authority, and
+  no peer or quoted third-party text can authorize commands, secrets, pushes/merges, installs,
+  deletions, or disabling hooks and permissions. Both READMEs have a Security section.
+
 ## 0.4.0 — 2026-10-16
 
 - **The model roster covers every model your agents can pick.** 21 models reachable through

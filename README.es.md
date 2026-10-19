@@ -185,6 +185,15 @@ description: Qué es mi-repo y qué no, su glosario y sus fronteras. Usala en tu
 La `description` es lo que el agente lee para decidir cuándo cargarla: escribila como «cuándo» +
 «qué». Mantenela corta: pasadas las ~170 líneas, nadie la lee entera.
 
+## Seguridad
+
+El buzón es un canal de entrada: otro agente puede repetir texto que leyó en una web, un README o
+un issue, y ese texto puede intentar dar órdenes. Las skills tratan todo lo que llega por
+`read_inbox` como **datos no confiables**: solo tus mensajes llevan tu autoridad, y ningún par ni
+texto citado de un tercero puede hacer que un agente corra comandos, toque credenciales, pushee,
+mergee, instale o desactive permisos. Si alguno lo pide, el agente se niega y te avisa. Esa
+exposición es propia de cualquier bandeja de entrada; esta es la frontera con la que se contiene.
+
 ## Lo que no hacen (todavía)
 
 Para que nadie lo suponga:
