@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **Roster: GPT-6.1 Terra and OpenCode's Beam Free** (partial update, 2026-10-28; the rest of the table
+  was not re-read). Terra from OpenAI's API model page and the Codex models page (the announcement
+  returned 403); Beam Free from the OpenCode Zen page — its identity as Reflection Beam comes from a
+  third-party blog and is marked unverified. Neither has a coding benchmark yet.
 - **One role list for skills and Aura Desktop.** `aura-workflow/roles.json` (+ `references/roles.md`)
   defines `lead`, `builder`, `gate` and a new `qa` role, each with the skills it loads, so the
   desktop presets can be read from the skills instead of a separate hard-coded list.

@@ -1,6 +1,6 @@
 # Models — the full per-model table
 
-Read **2026-10-16** from vendor pages. Load this only when choosing between models; `SKILL.md` has
+Read **2026-10-16** from vendor pages (GPT-6.1 Terra and Beam Free added 2026-10-28; the rest not re-read). Load this only when choosing between models; `SKILL.md` has
 the tiers and the pick-by-job table. Prices are API list prices per 1M tokens: input / output
 (cache read). **List API price ≠ what a subscription charges you.** Benchmarks keep their name,
 version, effort and harness; never compare across benchmarks. "unverified" = no vendor page read.
@@ -25,6 +25,7 @@ subscription · **agy** Antigravity CLI (plan-gated).
 |---|---|---|---|---|---|---|
 | **GPT-6 Astra** `gpt-6-astra` | CX, OC, `openai/` | frontier | "most capable model for the most demanding work" [O-api]. Terminal-Bench 4.0 57.9% at high effort "as reported by OpenAI" vs Opus 5.5 66.4% (xhigh): third-party-reported, different effort [A-opus]; FrontierSWE v2 65.5% vs Argon 55.0% in Google's card [G-card] | $10 / $50 ($1.00) [O-price] | 1.05M / 128K / 2026-04-30 [O-api] | Computer use, web search, file search; Ultra effort in Codex [O-api][CX-models]. Enterprise trusted-access first: unverified |
 | **GPT-6.1 Sol** `gpt-6.1-sol` | CX, OC, `openai/` | frontier (vendor: "near-Astra performance … at a lower cost") [CX-models] | "close to Astra on complex coding, computer use, and professional work" [O-model]. Announcement benchmarks not re-read (HTTP 403): unverified this round | $2 / $10 ($0.10); >272K input: 2× input, 1.5× output for the whole request [O-model][O-price] | 1.05M / 128K / 2026-04-30 [O-model]; release date unverified | Efforts low→max [O-api]; Codex default; not on Free/Go [CX-models] |
+| **GPT-6.1 Terra** `gpt-6.1-terra` | CX (CLI ≥ 0.159.0), API; OC unverified | efficient→strong, unverified for coding | "A fast, efficient model for visual reasoning, precise computer use, and clear, natural writing" [O-terra]; Codex docs: "clear writing, visual understanding, and computer use" [CX-models]. No coding benchmark read | $1 / $5 ($0.05) [O-terra] | 1.05M / 128K / cutoff 2026-06-01 [O-terra]; release date not stated | Efforts none→max, default `medium` [O-terra]. Announcement page returned HTTP 403, so figures come from the API model page. Read 2026-10-28; not in the Codex IDE extension per the Codex table [CX-models] |
 | **GPT-6 Luna** `gpt-6-luna` | CX, OC, OC-Go, `openai/` | efficient | "most efficient … focused, high-volume tasks" [O-api]. Terminal-Bench 4.0 16.4%, OSWorld 2.1 offline 48.9%, GDPval-AA v2.1 1437, third-party-reported against Haiku 5.5 [A-haiku] | $0.10 / $0.50 ($0.01) [O-price] | 1.05M / 128K / 2026-05-18 [O-api] | The Codex pick for Free/Go [CX-models] |
 | **GPT-6 Sol** `gpt-6-sol` | CX, OC, `openai/` | strong, superseded by 6.1 Sol in Codex's docs | unverified | $2 / $10 ($0.20) [O-price] | not read | Absent from Codex docs list [CX-models], but still in the CLI's own list (measured 2026-10-16) |
 | **GPT-5.5** `gpt-5.5` | OC, `openai/` | strong, **legacy** ($5 / $30 vs Sol's $2 / $10) | unverified | $5 / $30 ($0.50); >272K: $10 / $45 [O-price] | not read | `gpt-5.5-pro` $30 / $180 [O-price] |
@@ -55,10 +56,11 @@ subscription · **agy** Antigravity CLI (plan-gated).
 | **GLM-5.3** `glm-5.3` ⚠️ | OC, OC-Go | strong (open-weight) | ⚠️ Z.ai's own evals: Terminal-Bench 3.0 28.3, DeepSWE v1.1 66.9, Terminal-Bench 2.1 88.2 [Z-hf]; a Flash blog gives other numbers, sources disagree [Z-docs] | $1.40 / $4.40 ($0.26) [Z-price] | not listed: unverified | Same base as GLM-5.2, post-training only [Z-docs] |
 | **GLM-5.3-Flash** `glm-5.3-flash` ⚠️ | OC (`-free`), OC-Go | efficient | ⚠️ Terminal-Bench 2.1 84.3 (vendor blog) [Z-docs]; unverified beyond that | $0.15 / $0.50 ($0.03) [Z-price] | not listed | OC's free variant: zero-retention, no training [OC-zen] |
 | **MiniMax M3** `minimax-m3` ⚠️ | OC, OC-Go | strong→efficient (open-weight) | ⚠️ vendor blog, own scaffolds: BrowseComp 83.5; PostTrainBench 37.1 [M-blog] | ≤512K: $0.30 / $1.20 ($0.06); >512K: $0.60 / $2.40 [M-price] | up to 1M / output not listed / 2026-06-01 [M-blog] | Priority tier 1.5× [M-price] |
+| **Beam Free** `beam-free` | OC (free) | unverified | Free "for a limited time"; no benchmark read [OC-zen]. A third-party blog names it Reflection Beam 1.0 (501B-A23B, 1,048,576 context, Apache-2.0 weights): **unverified**, the Zen page does not say it [Beam-blog] | Free input/output/cache [OC-zen] | 1M per the blog, unverified | Read 2026-10-28. Prompts "not used for training" but "retained for 30 days for safety reasons" [OC-zen]. Blocked in many countries (China, Russia, Iran, Cuba, Belarus…; full list in [OC-zen]) |
 
 Listed in `opencode models` but not source-read (existence only): `qwen3.8-max`, `qwen3.8-flash`,
 `qwen3.7-plus` [Q-list], `mistral-large-4` [Mis-ov], `muse-spark-1.3`, `mimo-v2.6-*`, `longcat-*`,
-`nemotron-*`, `step-5-preview`, `hy3/hy4`, `big-pickle`, `beam-free`, `space-bunny`.
+`nemotron-*`, `step-5-preview`, `hy3/hy4`, `big-pickle`, `space-bunny`.
 
 ## Sources (read 2026-10-16)
 
@@ -73,6 +75,7 @@ Listed in `opencode models` but not source-read (existence only): `qwen3.8-max`,
 - [O-api] https://developers.openai.com/api/docs/models
 - [O-price] https://developers.openai.com/api/docs/pricing
 - [O-model] https://developers.openai.com/api/docs/models/gpt-6.1-sol
+- [O-terra] https://developers.openai.com/api/docs/models/gpt-6.1-terra (read 2026-10-28)
 - [CX-models] https://learn.chatgpt.com/docs/models
 - [DS-card] https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash
 - [DS-price] https://api-docs.deepseek.com/quick_start/pricing
@@ -94,4 +97,5 @@ Listed in `opencode models` but not source-read (existence only): `qwen3.8-max`,
 - [M-blog] https://www.minimax.io/blog/minimax-m3 ⚠️ search summary only
 - [Q-list] https://www.alibabacloud.com/help/en/model-studio/models
 - [Mis-ov] https://docs.mistral.ai/getting-started/models/models_overview/
-- [OC-zen] https://opencode.ai/docs/zen/
+- [OC-zen] https://opencode.ai/docs/zen/ (Beam Free read 2026-10-28)
+- [Beam-blog] https://www.orcarouter.ai/es/blog/beam-1-0-free-opencode-1m-context ⚠️ third-party, search summary only
