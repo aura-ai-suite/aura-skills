@@ -5,7 +5,7 @@ description: Real, dated data on the AI models behind your coding agents — tie
 
 # Model roster
 
-> **Last reviewed: 2026-10-16.**
+> **Last reviewed: 2026-10-16** (partial update 2026-10-28: GPT-6.1 Terra, Beam Free only).
 > **Freshness rule:** if today is more than 30 days after that date, tell the user *before*
 > assigning ("the model roster was last reviewed on <date>; want me to refresh it?") and offer to
 > refresh. Models, prices and quotas change monthly; a stale table assigns with confidence and
@@ -64,7 +64,7 @@ The full table (every selectable model, price, limits, benchmarks, source key pe
   team have none (measured); OpenCode with DeepSeek has none (measured). Others: not measured.
 - **Privacy:** a `*-free` OpenCode id may train on your prompts, except the four zero-retention
   ones (GLM-5.3-Flash Free, DeepSeek V4.1 Flash Free, Space Bunny Free, LongCat 2.5 Preview Free).
-  **Never send private code to the others.** Data-use for every other channel and **subscription
+  **Never send private code to the others** — Beam Free is not one of the four: it doesn't train on prompts, but keeps them 30 days, and it is blocked in many countries. Data-use for every other channel and **subscription
   quotas: unverified** — read the provider's page for the channel you use.
 
 ## 3. Your measured record — it beats every benchmark
