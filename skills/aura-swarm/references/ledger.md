@@ -1,6 +1,6 @@
 # The swarm ledger
 
-> **Draft.** Event names follow `swarm-perimeter` design §"Causal history" (aura `feature/mission-swarm-mode`). The line format is the Runtime's event envelope v1 (`runtime/events/envelope.go`),
+> **Draft.** Event names follow the contract `docs/03-contrato-eventos.md` §`swarm.*` of Aura (`main`). The line format is the Runtime's event envelope v1 (`runtime/events/envelope.go`),
 > and the event names follow what the Runtime owner publishes. If they differ from the Runtime
 > release you run, the Runtime wins.
 
@@ -8,7 +8,7 @@
 
 | Source | Holds | Written by |
 |---|---|---|
-| **Runtime events** | Facts: `swarm.started/paused/resumed/stopped/restarted` (`swarm.paused` carries `reason: human|cap_time|cap_tokens`), `swarm.approval_auto`, `swarm.approval_denied`, `swarm.agent_requested/granted/refused` (refusal `reason`: `cap_reached|tool_not_allowed|not_in_swarm|swarm_paused|policy_denied`), `swarm.terminal_requested/granted/refused/opened/closed`, `swarm.grant_expired`, `swarm.accepted`; new agents appear as `mission.members_added` with `parent_session_id` | **Only the Runtime.** An agent cannot write them and must not imitate them |
+| **Runtime events** | Facts: `swarm.started` (with `restarted_from?` on a restart), `swarm.paused` (`reason: human\|cap_time\|cap_tokens`, `processes_keep_running: true`), `swarm.resumed`, `swarm.stopped` (by the human: stop or accept), `swarm.restarted`, `swarm.approval_auto` / `swarm.approval_denied` (`rule_id`: `swarm:allow`, `swarm:critical_allow`, `swarm:critical_deny`, a user rule id, `swarm:stopped`), `swarm.agent_requested/granted/refused`, `swarm.terminal_requested/granted/refused` (refusal `reason`: `cap_reached\|tool_not_allowed\|not_in_swarm\|swarm_paused\|policy_denied`), `swarm.terminal_opened/closed`, `swarm.grant_expired` (Desktop did not confirm in 120 s), `swarm.accepted`; new agents appear as `mission.members_added` with `parent_session_id` | **Only the Runtime.** An agent cannot write them and must not imitate them |
 | **Ledger entries** (this file) | What agents **declare** | Agents |
 
 With Aura, the Runtime events are the source of truth for facts, and the ledger is what the
