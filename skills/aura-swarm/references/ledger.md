@@ -1,6 +1,6 @@
 # The swarm ledger
 
-> **Draft.** The line format is the Runtime's event envelope v1 (`runtime/events/envelope.go`),
+> **Draft.** Event names follow `swarm-perimeter` design §"Causal history" (aura `feature/mission-swarm-mode`). The line format is the Runtime's event envelope v1 (`runtime/events/envelope.go`),
 > and the event names follow what the Runtime owner publishes. If they differ from the Runtime
 > release you run, the Runtime wins.
 
@@ -8,7 +8,7 @@
 
 | Source | Holds | Written by |
 |---|---|---|
-| **Runtime events** | Facts: `swarm.started/paused/resumed/stopped/restarted`, `swarm.halted {reason}`, `swarm.approval_auto`, `swarm.approval_denied`, `swarm.seat_requested/granted/refused`, `swarm.terminal_opened`, `swarm.accepted` | **Only the Runtime.** An agent cannot write them and must not imitate them |
+| **Runtime events** | Facts: `swarm.started/paused/resumed/stopped/restarted` (states `running`, `paused`, `stopped`), `swarm.halted {reason}`, `swarm.approval_auto`, `swarm.approval_denied`, `swarm.agent_requested/granted/refused`, `swarm.terminal_requested/granted/refused/opened/closed`, `swarm.grant_expired`, `swarm.accepted`; new agents appear as `mission.members_added` with `parent_session_id` | **Only the Runtime.** An agent cannot write them and must not imitate them |
 | **Ledger entries** (this file) | What agents **declare** | Agents |
 
 With Aura, the Runtime events are the source of truth for facts, and the ledger is what the
@@ -23,13 +23,13 @@ the old one):
 ```json
 {"v":1,"id":"e-017","type":"swarm.ledger_entry","seq":17,"ts":"2026-10-28T09:12:03Z",
  "tool":"claude","session_id":"claude-4",
- "payload":{"mission_id":"m-1","actor":"claude-4","cause_id":"e-014",
+ "payload":{"mission_id":"m-1","cause_id":"e-014",
             "kind":"finding","text":"...","evidence":"path:line | command → output"}}
 ```
 
 | Field | Meaning |
 |---|---|
-| `payload.actor` | who: your session id (`human` and `runtime` are not yours to claim) |
+| `session_id` | who. With the Aura ledger tool the **Runtime sets the actor** from the calling process, so you never send `actor`. In a local file, put your own session id here; `human` and `runtime` are not yours to claim |
 | `payload.kind` | `finding` · `hypothesis` · `experiment` · `decision` · `blocker` · `objective_met` |
 | `payload.text` | what — one or two sentences |
 | `payload.cause_id` | why — the id of the entry or message that caused this. Optional only for the first entries |
