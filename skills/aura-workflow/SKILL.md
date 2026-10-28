@@ -63,7 +63,11 @@ invent requirements.
 |---|---|
 | The one who splits work, writes specs or reviews (lead / Gate) | `aura-lead`, plus `aura-model-roster` when assigning |
 | The one building an assigned task (Builder) | `aura-builder` |
+| The one trying to break a delivery (QA / Tester) | `aura-lead` → `references/gate.md` |
 | Anyone about to create branches or commit | `aura-git-isolation` |
+
+The canonical role list (ids `lead`, `builder`, `gate`, `qa`) is `roles.json`, with
+`references/roles.md`; Aura Desktop will use the same one.
 
 Working alone, you are both — **one hat at a time**: first agree on *what*, then build, then
 verify by rereading the criteria against the code you wrote.
