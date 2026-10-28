@@ -6,6 +6,9 @@
   was not re-read). Terra from OpenAI's API model page, the Codex models page and the official announcement (text
   pasted by the user: our fetch got 403); Beam Free from the OpenCode Zen page — its identity as Reflection Beam comes from a
   third-party blog and is marked unverified. Terra's coding number (Terminal-Bench 4.0 50.3%) is vendor-reported.
+- **`aura-swarm` (draft) and the `orchestrator` role.** How the lead seat and the workers behave in a
+  swarm mission: autonomy inside a human-drawn perimeter, which channel for what, and a ledger
+  of declared entries (Runtime-emitted facts are never written by agents). Role list updated.
 - **One role list for skills and Aura Desktop.** `aura-workflow/roles.json` (+ `references/roles.md`)
   defines `lead`, `builder`, `gate` and a new `qa` role, each with the skills it loads, so the
   desktop presets can be read from the skills instead of a separate hard-coded list.

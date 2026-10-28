@@ -6,6 +6,7 @@ presets (not shipped yet), so the ids in the tile, the missions and these skills
 | id | Load | Notes |
 |---|---|---|
 | `lead` | `aura-workflow`, `aura-lead`, `aura-model-roster` | Specs, assignment, merge. |
+| `orchestrator` | `aura-workflow`, `aura-swarm`, `aura-lead`, `aura-model-roster`, `aura-git-isolation` | Swarm lead seat only. A swarm worker is a `builder`. |
 | `builder` | `aura-workflow`, `aura-builder`, `aura-git-isolation` | One task, own branch, handoff. |
 | `gate` | `aura-workflow`, `aura-lead` (`references/gate.md`), `aura-git-isolation` | Verifies and may reject. |
 | `qa` | `aura-workflow`, `aura-lead` (`references/gate.md` §2 "Run, don't assume") | Adversarial testing; reports defects, doesn't merge or build features. |

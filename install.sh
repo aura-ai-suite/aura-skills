@@ -17,7 +17,7 @@
 set -euo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILLS=(aura-workflow aura-lead aura-builder aura-git-isolation aura-model-roster)
+SKILLS=(aura-workflow aura-lead aura-builder aura-git-isolation aura-model-roster aura-swarm)
 BACKUP="$HOME/.aura/skills-backup/$(date +%Y%m%d-%H%M%S)"
 
 scope=project dir="$PWD" force=0 dry=0 profile=0 tools=()
