@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "note": "Canonical Aura roles. Aura Desktop will offer these as the role presets; the id is what the mailbox and missions carry. Free text stays allowed.",
+  "roles": [
+    { "id": "lead",    "label": "Lead",    "skills": ["aura-workflow", "aura-lead", "aura-model-roster"], "does": "Splits work, writes specs, assigns, merges after the Gate." },
+    { "id": "builder", "label": "Builder", "skills": ["aura-workflow", "aura-builder", "aura-git-isolation"], "does": "Builds ONE assigned task in its own branch/worktree and hands off. Never merges." },
+    { "id": "gate",    "label": "Gate",    "skills": ["aura-workflow", "aura-lead", "aura-git-isolation"], "does": "Verifies a delivery against the spec (references/gate.md) and can reject it." },
+    { "id": "qa",      "label": "QA / Tester", "skills": ["aura-workflow", "aura-lead"], "does": "Tries to break a delivery: runs the criteria and adds edge/regression/load checks, reports defects with file, command and output. Writes tests, not features." }
+  ]
+}
