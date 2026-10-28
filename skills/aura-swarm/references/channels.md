@@ -7,7 +7,7 @@
 | **direct message** (`question`, `request`, `blocked`) | One agent needs one answer or one task | Anything the ledger already says |
 | **inbox** (`read_inbox`) | Every cycle, before you plan; and when told you have messages | — |
 | **ledger entry** | What a seat that joins late needs: findings, hypotheses, experiments, decisions, blockers | Orders to peers |
-| **`usuario` / the user's chat** | The swarm is halted and you must say why; a decision that is the human's; the final summary | Asking permission to continue |
+| **`usuario` / the user's chat** | The swarm is paused or stopped and you must say why; a decision that is the human's; the final summary | Asking permission to continue |
 
 Rules:
 - Short, concrete messages. Don't reply just to reply.

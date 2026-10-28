@@ -8,7 +8,7 @@
 
 | Source | Holds | Written by |
 |---|---|---|
-| **Runtime events** | Facts: `swarm.started/paused/resumed/stopped/restarted` (states `running`, `paused`, `stopped`), `swarm.halted {reason}`, `swarm.approval_auto`, `swarm.approval_denied`, `swarm.agent_requested/granted/refused`, `swarm.terminal_requested/granted/refused/opened/closed`, `swarm.grant_expired`, `swarm.accepted`; new agents appear as `mission.members_added` with `parent_session_id` | **Only the Runtime.** An agent cannot write them and must not imitate them |
+| **Runtime events** | Facts: `swarm.started/paused/resumed/stopped/restarted` (`swarm.paused` carries `reason: human|cap_time|cap_tokens`), `swarm.approval_auto`, `swarm.approval_denied`, `swarm.agent_requested/granted/refused` (refusal `reason`: `cap_reached|tool_not_allowed|not_in_swarm|swarm_paused|policy_denied`), `swarm.terminal_requested/granted/refused/opened/closed`, `swarm.grant_expired`, `swarm.accepted`; new agents appear as `mission.members_added` with `parent_session_id` | **Only the Runtime.** An agent cannot write them and must not imitate them |
 | **Ledger entries** (this file) | What agents **declare** | Agents |
 
 With Aura, the Runtime events are the source of truth for facts, and the ledger is what the
