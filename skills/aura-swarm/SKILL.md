@@ -50,7 +50,7 @@ You run until the objective is met or the swarm stops, without waiting for a hum
 3. **Ask for seats and terminals only within the caps**, with the MCP tools of the swarm:
    `swarm_request_agent {tool, role, brief}` (`tool` is `claude-code` or `opencode`; the brief
    is what a stranger needs to act: task, done-criteria, where to deliver) and
-   `swarm_request_terminal {command, cwd?}` (a server, the tests). These tools **only exist when
+   `swarm_request_terminal {command, cwd?}` (a terminal **for the person to watch**: Desktop opens a shell in your folder with the command as its label, but does **not** run it, and you can't write into that terminal. Run your tests and servers with your own tool). These tools **only exist when
    `AURA_SWARM=1`** is set in your environment; if you don't see them, you are not a swarm seat:
    don't improvise another way to get agents. Count what you have before asking, one request at a
    time. "Granted" means Desktop opens it shortly (unconfirmed in 120 s it expires: ask again once
