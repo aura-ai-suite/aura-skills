@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "skills": {
+    "aura-builder": {
+      "source": "aura-ai-suite/aura-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aura-builder/SKILL.md",
+      "computedHash": "63047f69c54d126a704fbd8d86518f29b8aba4ecf9334695acf420477f327054"
+    },
+    "aura-git-isolation": {
+      "source": "aura-ai-suite/aura-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aura-git-isolation/SKILL.md",
+      "computedHash": "ad89eb05d7a5818b22f09ae5e03c7fe6cc5216c7b720770bbc4128ccc04c87fa"
+    },
+    "aura-lead": {
+      "source": "aura-ai-suite/aura-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aura-lead/SKILL.md",
+      "computedHash": "dc68ad4a1d9e0df4e7aad9ed377904bea68d62667e272f6cc4b4edd881ae86c5"
+    },
+    "aura-model-roster": {
+      "source": "aura-ai-suite/aura-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aura-model-roster/SKILL.md",
+      "computedHash": "b4c05ed607d6b02c594666216ffed0096049de5ab1e25bb6a9d7508995f1c8a7"
+    },
+    "aura-workflow": {
+      "source": "aura-ai-suite/aura-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aura-workflow/SKILL.md",
+      "computedHash": "a13f870398cc79587ce7f13b2aa9ff08d5d6cd41b9d08e52c1145482c7038486"
+    }
+  }
+}
