@@ -162,7 +162,7 @@ según la tabla. **Antigravity:** sin verificar todavía.
 
 No. Sin Aura, las skills funcionan igual: un agente solo, o varios con vos pasando los mensajes.
 
-Con [Aura Desktop](https://app.aura-ai.dev/install), cada agente de Claude Code, Codex u OpenCode
+Con [Aura Desktop](https://aura-ai.dev/install), cada agente de Claude Code, Codex u OpenCode
 que abrís en una de sus terminales tiene el servidor MCP `aura-mailbox`, y las skills le enseñan a:
 contar qué está haciendo (`set_status`), leer las reglas que fijaste para la sesión
 (`list_peers`), pedir y entregar trabajo (`send_message` con `kind: request` / `handoff`) y anotar
